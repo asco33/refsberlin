@@ -9,7 +9,7 @@ import fm.weigl.refsberlin.gameslist.net.GamesRepository
 import fm.weigl.refsberlin.gameslist.view.GamesListEventDelegate
 import fm.weigl.refsberlin.gameslist.view.IGamesListView
 import fm.weigl.refsberlin.rx.Schedulers
-import fm.weigl.refsberlin.view.SnackbarView
+import fm.weigl.refsberlin.view.ISnackbarView
 import javax.inject.Inject
 
 /**
@@ -29,7 +29,7 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
     }
 
     lateinit var view: IGamesListView
-    lateinit var snackBar: SnackbarView
+    lateinit var snackBar: ISnackbarView
     private var games = listOf<Game>()
 
     fun start() {

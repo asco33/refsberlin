@@ -8,7 +8,7 @@ import fm.weigl.refsberlin.calendar.CalendarEventCreator
 import fm.weigl.refsberlin.gameslist.net.GamesRepository
 import fm.weigl.refsberlin.gameslist.view.IGamesListView
 import fm.weigl.refsberlin.rx.TestSchedulers
-import fm.weigl.refsberlin.view.SnackbarView
+import fm.weigl.refsberlin.view.ISnackbarView
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,7 +27,7 @@ class GamesListPresenterTest {
     @Mock lateinit var filter: GamesFilter
     @Mock lateinit var view: IGamesListView
     @Mock lateinit var eventCreator: CalendarEventCreator
-    @Mock lateinit var snackBar: SnackbarView
+    @Mock lateinit var snackBar: ISnackbarView
     @Mock lateinit var uiNavigator: UINavigator
     val schedulers = TestSchedulers()
 

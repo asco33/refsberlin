@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="game"
             type="fm.weigl.refsberlin.gameslist.view.GameViewModel" />
@@ -44,15 +46,15 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:onClick="@{game.eventIconClicked}"
-                        android:src="@drawable/ic_event" />
+                        android:onClick="@{game.navigationIconClicked}"
+                        android:src="@drawable/ic_navigation" />
 
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_marginTop="16dp"
-                        android:onClick="@{game.navigationIconClicked}"
-                        android:src="@drawable/ic_navigation" />
+                        android:onClick="@{game.eventIconClicked}"
+                        android:src="@drawable/ic_event" />
 
                 </LinearLayout>
 
@@ -88,6 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="@{game.ref0}"
+                        android:visibility="@{game.ref0 == null ? View.GONE : View.VISIBLE}"
                         tools:text="Max Musterref" />
 
                     <TextView
@@ -95,49 +98,56 @@
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{game.ref1}" />
+                        android:text="@{game.ref1}"
+                        android:visibility="@{game.ref1 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/tv_game_ref2"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{game.ref2}" />
+                        android:text="@{game.ref2}"
+                        android:visibility="@{game.ref2 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/tv_game_ref3"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{game.ref3}" />
+                        android:text="@{game.ref3}"
+                        android:visibility="@{game.ref3 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/tv_game_ref4"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{game.ref4}" />
+                        android:text="@{game.ref4}"
+                        android:visibility="@{game.ref4 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/tv_game_ref5"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{game.ref5}" />
+                        android:text="@{game.ref5}"
+                        android:visibility="@{game.ref5 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/tv_game_ref6"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{game.ref6}" />
+                        android:text="@{game.ref6}"
+                        android:visibility="@{game.ref6 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
                         android:id="@+id/tv_game_ref7"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{game.ref7}" />
+                        android:text="@{game.ref7}"
+                        android:visibility="@{game.ref7 == null ? View.GONE : View.VISIBLE}" />
 
                 </LinearLayout>
 

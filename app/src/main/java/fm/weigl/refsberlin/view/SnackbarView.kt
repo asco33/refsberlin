@@ -8,11 +8,11 @@ import javax.inject.Inject
  * Created by asco on 4/22/17.
  */
 
-interface SnackbarView {
+interface ISnackbarView {
     fun showSnackbar(text: String)
 }
 
-class SnackbarViewExtension @Inject constructor() : SnackbarView {
+class SnackbarView @Inject constructor() : ISnackbarView {
 
     var parentView: View? = null
 

@@ -52,35 +52,35 @@ class GameViewModel @Inject constructor(private val textHighlighter: TextHighlig
         // Referees
         game.referees.getOrNull(0)?.apply {
             ref0.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref0.set(textHighlighter.highlightText(""))
+        }
 
         game.referees.getOrNull(1)?.apply {
             ref1.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref1.set(textHighlighter.highlightText(""))
+        }
 
         game.referees.getOrNull(2)?.apply {
             ref2.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref2.set(textHighlighter.highlightText(""))
+        }
 
         game.referees.getOrNull(3)?.apply {
             ref3.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref4.set(textHighlighter.highlightText(""))
+        }
 
         game.referees.getOrNull(4)?.apply {
             ref4.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref4.set(textHighlighter.highlightText(""))
+        }
 
         game.referees.getOrNull(5)?.apply {
             ref5.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref5.set(textHighlighter.highlightText(""))
+        }
 
         game.referees.getOrNull(6)?.apply {
             ref6.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref6.set(textHighlighter.highlightText(""))
+        }
 
         game.referees.getOrNull(7)?.apply {
             ref7.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        } ?: ref7.set(textHighlighter.highlightText(""))
+        }
 
     }
 

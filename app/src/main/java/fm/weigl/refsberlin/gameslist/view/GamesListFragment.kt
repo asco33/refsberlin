@@ -10,14 +10,14 @@ import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.base.BaseFragment
 import fm.weigl.refsberlin.databinding.GamesListFragmentBinding
 import fm.weigl.refsberlin.gameslist.presenter.GamesListPresenter
-import fm.weigl.refsberlin.view.SnackbarViewExtension
+import fm.weigl.refsberlin.view.SnackbarView
 import javax.inject.Inject
 
 class GamesListFragment : BaseFragment() {
 
     @Inject lateinit var presenter: GamesListPresenter
     @Inject lateinit var gamesListView: GamesListView
-    @Inject lateinit var snackBar: SnackbarViewExtension
+    @Inject lateinit var snackBar: SnackbarView
     private lateinit var binding: GamesListFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
