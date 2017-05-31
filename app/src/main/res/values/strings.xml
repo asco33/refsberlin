@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RefsBerlin</string>
+    <string name="hint_gameslist_filter">Team oder Name des Schiedsrichters</string>
+    <string name="match_representation">%1$s - %2$s</string>
+    <string name="referee_representation">%1$s (%2$s)</string>
+    <string name="crew">Crew:</string>
+    <string name="navigation_drawer_open">Öffnen</string>
+    <string name="navigation_drawer_close">Schließen</string>
+    <string name="nav_item_gameslist">Ansetzungen</string>
+    <string name="nav_item_about_the_app">Über die App</string>
+    <string name="schedule_disclaimer">Alle Angaben ohne Gewähr. \nOffizielle Seite für Schiedsrichteransetzungen ist www.refbb.de. </string>
+</resources>
