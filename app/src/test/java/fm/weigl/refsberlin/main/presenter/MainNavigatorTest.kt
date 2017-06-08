@@ -6,8 +6,6 @@ import com.nhaarman.mockito_kotlin.*
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.abouttheapp.view.AboutTheAppFragment
 import fm.weigl.refsberlin.gameslist.view.GamesListFragment
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,30 +21,14 @@ class MainNavigatorTest {
 
     @Mock lateinit var fragmentManager: FragmentManager
     @Mock lateinit var transaction: FragmentTransaction
+    @Mock lateinit var delegate: MainNavigatorDelegate
 
     lateinit var classToTest: MainNavigator
 
     @Before
     fun setUp() {
         classToTest = MainNavigator(fragmentManager)
-    }
-
-    @Test
-    fun notHandlesBackPressedWhenBackstackIsEmpty() {
-
-        given(fragmentManager.backStackEntryCount).willReturn(0)
-
-        assertFalse(classToTest.onBackPressed())
-
-    }
-
-    @Test
-    fun handlesBackPressedWhenBackstackIsNotEmpty() {
-
-        given(fragmentManager.backStackEntryCount).willReturn(1)
-
-        assertTrue(classToTest.onBackPressed())
-
+        classToTest.delegate = delegate
     }
 
     @Test
@@ -63,9 +45,22 @@ class MainNavigatorTest {
     }
 
     @Test
+    fun popsBackStackBeforShowingGamesListFragment() {
+
+        mockTransAction()
+
+        given(fragmentManager.backStackEntryCount).willReturn(1)
+
+        classToTest.showGamesList()
+
+        then(fragmentManager).should().popBackStack()
+
+    }
+
+    @Test
     fun notShowsSecondGamesList() {
 
-        given(fragmentManager.fragments).willReturn(listOf(GamesListFragment()))
+        given(fragmentManager.findFragmentById(R.id.main_content_container)).willReturn(GamesListFragment())
 
         classToTest.showGamesList()
 
@@ -105,6 +100,34 @@ class MainNavigatorTest {
         classToTest.showGamesList()
 
         then(transaction).should(never()).addToBackStack(any())
+
+    }
+
+    @Test
+    fun delegatesNewFragmentMenuId() {
+
+        mockTransAction()
+
+        classToTest.showAboutTheApp()
+
+        then(delegate).should().fragmentChanged(argThat {
+            this is AboutTheAppFragment
+        })
+
+    }
+
+    @Test
+    fun delegatesFragmentOnBackStackChanged() {
+
+        val fragment = AboutTheAppFragment()
+        given(fragmentManager.findFragmentById(R.id.main_content_container)).willReturn(fragment)
+
+        verify(fragmentManager).addOnBackStackChangedListener(argThat {
+            this.onBackStackChanged()
+            true
+        })
+
+        then(delegate).should(atLeastOnce()).fragmentChanged(fragment)
 
     }
 

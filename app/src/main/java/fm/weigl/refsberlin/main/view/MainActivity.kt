@@ -28,10 +28,12 @@ class MainActivity : BaseActivity() {
         val toolbar = binding.mainInclude.toolbar
         setSupportActionBar(toolbar)
 
+        setExtraLifecycleDelegates(navigationDrawerView)
+
         navigationDrawerView.setViews(binding.drawerLayout, binding.navView, toolbar)
         navigationDrawerView.delegate = presenter
 
-        setExtraLifecycleDelegates(mainNavigator)
+        mainNavigator.delegate = navigationDrawerView
 
         presenter.start()
     }
