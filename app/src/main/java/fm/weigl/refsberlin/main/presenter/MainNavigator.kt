@@ -21,7 +21,7 @@ class MainNavigator @Inject constructor(
 
     override fun showGamesList() {
         if (!isGamesListFragmentOnTop()) {
-            showFragment(GamesListFragment())
+            showFragment(GamesListFragment(), false)
         }
     }
 
@@ -36,12 +36,15 @@ class MainNavigator @Inject constructor(
         return true
     }
 
-    private fun showFragment(fragment: Fragment) {
-        fragmentManager
+    private fun showFragment(fragment: Fragment, addToBackStack: Boolean = true) {
+
+        var replace = fragmentManager
                 .beginTransaction()
                 .replace(R.id.main_content_container, fragment)
-                .addToBackStack(null)
-                .commit()
+
+        if (addToBackStack) replace = replace.addToBackStack(null)
+
+        replace.commit()
     }
 
     private fun isGamesListFragmentOnTop() = fragmentManager.fragments?.firstOrNull() is GamesListFragment

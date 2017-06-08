@@ -86,6 +86,28 @@ class MainNavigatorTest {
 
     }
 
+    @Test
+    fun addsFragmentToBackStack() {
+
+        mockTransAction()
+
+        classToTest.showAboutTheApp()
+
+        then(transaction).should().addToBackStack(null)
+
+    }
+
+    @Test
+    fun notAddsGamesListToBackStack() {
+
+        mockTransAction()
+
+        classToTest.showGamesList()
+
+        then(transaction).should(never()).addToBackStack(any())
+
+    }
+
 
     private fun mockTransAction() {
         given(fragmentManager.beginTransaction()).willReturn(transaction)
