@@ -11,4 +11,5 @@
     <string name="schedule_disclaimer">Alle Angaben ohne Gewähr. \nOffizielle Seite für Schiedsrichteransetzungen ist www.refbb.de. </string>
     <string name="error">Es ist ein Fehler aufgetreten \n%1$s</string>
     <string name="retry">Wiederholen</string>
+    <string name="number_of_games">%1$d Spiele</string>
 </resources>

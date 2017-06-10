@@ -1,7 +1,13 @@
 package fm.weigl.refsberlin.gameslist.view
 
 import android.app.Activity
+import android.content.res.Resources
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.given
+import com.nhaarman.mockito_kotlin.then
+import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.TestGames
+import fm.weigl.refsberlin.android.Toaster
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -18,6 +24,8 @@ import org.mockito.junit.MockitoJUnitRunner
 class GamesListViewTest {
 
     @Mock lateinit var activity: Activity
+    @Mock lateinit var toaster: Toaster
+    @Mock lateinit var resources: Resources
     @Mock lateinit var adapter: GamesListAdapter
     @Mock lateinit var eventDelegate: GamesListEventDelegate
 
@@ -25,7 +33,7 @@ class GamesListViewTest {
 
     @Before
     fun setUp() {
-        classToTest = GamesListView(adapter, activity)
+        classToTest = GamesListView(adapter, activity, toaster, resources)
         classToTest.eventDelegate = eventDelegate
     }
 
@@ -64,6 +72,8 @@ class GamesListViewTest {
 
         val games = listOf(TestGames.testGame)
 
+        given(resources.getString(any(), any())).willReturn("")
+
         classToTest.displayGames(games)
 
         verify(adapter).games = games
@@ -78,6 +88,19 @@ class GamesListViewTest {
         classToTest.highlightGamesWithText(text)
 
         verify(adapter).highlightText = text
+
+    }
+
+    @Test
+    fun displaysNumberOfGames() {
+
+        val text = "text"
+        val games = listOf(TestGames.testGame, TestGames.testGame)
+        given(resources.getString(R.string.number_of_games, 2)).willReturn(text)
+
+        classToTest.displayGames(games)
+
+        then(toaster).should().showToast(text)
 
     }
 
