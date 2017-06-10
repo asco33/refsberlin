@@ -10,6 +10,9 @@ If you want to build & run the app you have to
 1. add your own `fabric.properties` file (or remove any Crashlytics stuff from the code)
 2. add your own `ApiKey` property (send me a message if you need one)
 
+## Backend
+The backend project can be found here: https://github.com/asco33/refserver
+
 
 ## License
 
