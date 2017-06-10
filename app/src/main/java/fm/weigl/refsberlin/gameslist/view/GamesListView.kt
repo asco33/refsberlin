@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.databinding.ObservableBoolean
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.EditText
 import fm.weigl.refdata.Game
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.android.Toaster
@@ -19,6 +20,7 @@ interface IGamesListView {
     fun displayGames(games: List<Game>)
     fun highlightGamesWithText(text: String)
     fun setLoading(loading: Boolean)
+    fun getFilterText(): String
 }
 
 @ActivityScope
@@ -31,21 +33,24 @@ class GamesListView @Inject constructor(
 
     val loading = ObservableBoolean(false)
 
+    lateinit var editText: EditText
+
     var eventDelegate: GamesListEventDelegate? = null
         set(value) {
             field = value
             adapter.eventDelegate = value
         }
 
-    fun setViews(recyclerView: RecyclerView) {
+    fun setViews(recyclerView: RecyclerView, editText: EditText) {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
+        this.editText = editText
 
     }
 
     fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-        eventDelegate?.filterTextChanged(text.toString().trim())
+        eventDelegate?.filterTextChanged()
     }
 
     override fun displayGames(games: List<Game>) {
@@ -59,5 +64,5 @@ class GamesListView @Inject constructor(
 
     override fun setLoading(loading: Boolean) = this.loading.set(loading)
 
-
+    override fun getFilterText(): String = editText.text.toString().trim()
 }

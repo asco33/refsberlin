@@ -2,8 +2,11 @@ package fm.weigl.refsberlin.gameslist.view
 
 import android.app.Activity
 import android.content.res.Resources
+import android.text.Editable
+import android.widget.EditText
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.given
+import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.then
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.TestGames
@@ -28,6 +31,7 @@ class GamesListViewTest {
     @Mock lateinit var resources: Resources
     @Mock lateinit var adapter: GamesListAdapter
     @Mock lateinit var eventDelegate: GamesListEventDelegate
+    @Mock lateinit var editText: EditText
 
     lateinit var classToTest: GamesListView
 
@@ -35,6 +39,7 @@ class GamesListViewTest {
     fun setUp() {
         classToTest = GamesListView(adapter, activity, toaster, resources)
         classToTest.eventDelegate = eventDelegate
+        classToTest.setViews(mock(), editText)
     }
 
     @Test
@@ -56,14 +61,26 @@ class GamesListViewTest {
     }
 
     @Test
-    fun delegatesTrimmedFilterTextChanged() {
+    fun delegatesFilterTextChanged() {
 
         val text = "  text  "
-        val trimmedText = "text"
 
         classToTest.onTextChanged(text, 0, 0, 0)
 
-        verify(eventDelegate).filterTextChanged(trimmedText)
+        verify(eventDelegate).filterTextChanged()
+
+    }
+
+    @Test
+    fun returnsTrimmedFilterText() {
+
+        val text = " text "
+        val editable = mock<Editable>()
+        given(editable.toString()).willReturn(text)
+
+        given(editText.text).willReturn(editable)
+
+        assertEquals("text", classToTest.getFilterText())
 
     }
 

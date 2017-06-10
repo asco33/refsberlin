@@ -1,5 +1,7 @@
 package fm.weigl.refsberlin.gameslist.presenter
 
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.then
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.TestGames.Companion.placeName
@@ -48,6 +50,8 @@ class GamesListPresenterTest {
     fun displayGames() {
 
         given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(view.getFilterText()).willReturn("")
+        given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
 
         classToTest.loadGames()
 
@@ -58,13 +62,29 @@ class GamesListPresenterTest {
     @Test
     fun filtersGamesWhenFilterTextChanged() {
 
-        val filterString = "filter"
+        val filterText = "filter"
+        given(view.getFilterText()).willReturn(filterText)
         given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
-        given(filter.filterGames(gamesList, filterString)).willReturn(listOf(game2))
 
         classToTest.loadGames()
 
-        classToTest.filterTextChanged(filterString)
+        given(filter.filterGames(gamesList, filterText)).willReturn(listOf(game2))
+
+        classToTest.filterTextChanged()
+
+        verify(view).displayGames(listOf(game2))
+
+    }
+
+    @Test
+    fun filtersGamesAfterLoadingThem() {
+
+        val filterText = "filter"
+        given(filter.filterGames(gamesList, filterText)).willReturn(listOf(game2))
+        given(view.getFilterText()).willReturn(filterText)
+        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+
+        classToTest.loadGames()
 
         verify(view).displayGames(listOf(game2))
 
@@ -73,11 +93,12 @@ class GamesListPresenterTest {
     @Test
     fun passesFilterTextAsHighlightToView() {
 
-        val text = "text"
+        val filterText = "text"
+        given(view.getFilterText()).willReturn(filterText)
 
-        classToTest.filterTextChanged(text)
+        classToTest.filterTextChanged()
 
-        verify(view).highlightGamesWithText(text)
+        verify(view).highlightGamesWithText(filterText)
     }
 
     @Test

@@ -44,8 +44,8 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
                 .subscribe({
 
                     this.games = it
-                    view.displayGames(it)
                     view.setLoading(false)
+                    showFilteredGames()
 
                 },
                         {
@@ -58,14 +58,17 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
 
     }
 
-    override fun filterTextChanged(filterText: String) {
-        view.displayGames(filter.filterGames(games, filterText))
-        view.highlightGamesWithText(filterText)
-    }
+    override fun filterTextChanged() = showFilteredGames()
 
     override fun eventIconClickedForGame(game: Game) = eventCreator.createEventForGame(game)
 
     override fun navigationIconClickedForGame(game: Game) = uiNavigator.showNavigationToLocation(game.place.place)
 
     override fun retryClicked() = loadGames()
+
+    private fun showFilteredGames() {
+        val filterText = view.getFilterText()
+        view.displayGames(filter.filterGames(games, filterText))
+        view.highlightGamesWithText(filterText)
+    }
 }
