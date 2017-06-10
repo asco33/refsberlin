@@ -32,7 +32,7 @@ class GamesListFragment : BaseFragment() {
         errorScreen.delegate = presenter
         gamesListView.setViews(binding.rvGameslist, binding.etGameslistFilter)
         presenter.view = gamesListView
-        gamesListView.eventDelegate = presenter
+        gamesListView.delegate = presenter
 
         presenter.loadGames()
 

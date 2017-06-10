@@ -11,6 +11,7 @@ import com.nhaarman.mockito_kotlin.then
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.android.Toaster
+import fm.weigl.refsberlin.base.LoadingState
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -30,7 +31,7 @@ class GamesListViewTest {
     @Mock lateinit var toaster: Toaster
     @Mock lateinit var resources: Resources
     @Mock lateinit var adapter: GamesListAdapter
-    @Mock lateinit var eventDelegate: GamesListEventDelegate
+    @Mock lateinit var delegate: GamesListEventDelegate
     @Mock lateinit var editText: EditText
 
     lateinit var classToTest: GamesListView
@@ -38,25 +39,30 @@ class GamesListViewTest {
     @Before
     fun setUp() {
         classToTest = GamesListView(adapter, activity, toaster, resources)
-        classToTest.eventDelegate = eventDelegate
+        classToTest.delegate = delegate
         classToTest.setViews(mock(), editText)
     }
 
     @Test
-    fun showsLoading() {
+    fun setsLoadingStatesCorrectly() {
 
-        classToTest.setLoading(true)
+        classToTest.setLoadingState(LoadingState.DONE)
+        assertEquals(LoadingState.DONE, classToTest.loadingState.get())
 
-        assertEquals(true, classToTest.loading.get())
+        classToTest.setLoadingState(LoadingState.LOADING)
+        assertEquals(LoadingState.LOADING, classToTest.loadingState.get())
+
+        classToTest.setLoadingState(LoadingState.REFRESHING)
+        assertEquals(LoadingState.REFRESHING, classToTest.loadingState.get())
 
     }
 
     @Test
-    fun hidesLoading() {
+    fun delegatesPullToRefresh() {
 
-        classToTest.setLoading(false)
+        classToTest.onRefresh()
 
-        assertEquals(false, classToTest.loading.get())
+        then(delegate).should().refreshPulled()
 
     }
 
@@ -67,7 +73,7 @@ class GamesListViewTest {
 
         classToTest.onTextChanged(text, 0, 0, 0)
 
-        verify(eventDelegate).filterTextChanged()
+        verify(delegate).filterTextChanged()
 
     }
 

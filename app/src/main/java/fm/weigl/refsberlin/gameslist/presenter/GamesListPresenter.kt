@@ -2,6 +2,7 @@ package fm.weigl.refsberlin.gameslist.presenter
 
 import android.util.Log
 import fm.weigl.refdata.Game
+import fm.weigl.refsberlin.base.LoadingState
 import fm.weigl.refsberlin.base.UINavigator
 import fm.weigl.refsberlin.calendar.CalendarEventCreator
 import fm.weigl.refsberlin.di.ActivityScope
@@ -35,7 +36,9 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
 
     fun loadGames() {
 
-        view.setLoading(true)
+        val loadingState = if (games.isEmpty()) LoadingState.LOADING else LoadingState.REFRESHING
+
+        view.setLoadingState(loadingState)
         errorScreen.hideError()
 
         gamesRepository.getGames()
@@ -44,7 +47,7 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
                 .subscribe({
 
                     this.games = it
-                    view.setLoading(false)
+                    view.setLoadingState(LoadingState.DONE)
                     showFilteredGames()
 
                 },
@@ -52,7 +55,7 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
                             Log.e(TAG, it.toString())
                             it.printStackTrace()
                             errorScreen.showError(it.toString())
-                            view.setLoading(false)
+                            view.setLoadingState(LoadingState.DONE)
                         })
 
 
@@ -65,6 +68,8 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
     override fun navigationIconClickedForGame(game: Game) = uiNavigator.showNavigationToLocation(game.place.place)
 
     override fun retryClicked() = loadGames()
+
+    override fun refreshPulled() = loadGames()
 
     private fun showFilteredGames() {
         val filterText = view.getFilterText()

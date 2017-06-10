@@ -2,13 +2,14 @@ package fm.weigl.refsberlin.gameslist.view
 
 import android.app.Activity
 import android.content.res.Resources
-import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.EditText
 import fm.weigl.refdata.Game
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.android.Toaster
+import fm.weigl.refsberlin.base.LoadingState
 import fm.weigl.refsberlin.di.ActivityScope
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ import javax.inject.Inject
 interface IGamesListView {
     fun displayGames(games: List<Game>)
     fun highlightGamesWithText(text: String)
-    fun setLoading(loading: Boolean)
+    fun setLoadingState(state: LoadingState)
     fun getFilterText(): String
 }
 
@@ -31,11 +32,11 @@ class GamesListView @Inject constructor(
         private val resources: Resources
 ) : IGamesListView {
 
-    val loading = ObservableBoolean(false)
+    val loadingState = ObservableField<LoadingState>()
 
     private lateinit var editText: EditText
 
-    var eventDelegate: GamesListEventDelegate? = null
+    var delegate: GamesListEventDelegate? = null
         set(value) {
             field = value
             adapter.eventDelegate = value
@@ -50,10 +51,12 @@ class GamesListView @Inject constructor(
     }
 
     fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-        eventDelegate?.filterTextChanged()
+        delegate?.filterTextChanged()
     }
 
     fun clearButtonClicked() = editText.setText("")
+
+    fun onRefresh() = delegate?.refreshPulled()
 
     override fun displayGames(games: List<Game>) {
         adapter.games = games
@@ -64,7 +67,7 @@ class GamesListView @Inject constructor(
         adapter.highlightText = text
     }
 
-    override fun setLoading(loading: Boolean) = this.loading.set(loading)
+    override fun setLoadingState(state: LoadingState) = loadingState.set(state)
 
     override fun getFilterText(): String = editText.text.toString().trim()
 }

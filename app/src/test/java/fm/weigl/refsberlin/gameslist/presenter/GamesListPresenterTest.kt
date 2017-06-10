@@ -5,6 +5,7 @@ import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.then
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.TestGames.Companion.placeName
+import fm.weigl.refsberlin.base.LoadingState
 import fm.weigl.refsberlin.base.UINavigator
 import fm.weigl.refsberlin.calendar.CalendarEventCreator
 import fm.weigl.refsberlin.error.view.IErrorScreen
@@ -54,6 +55,19 @@ class GamesListPresenterTest {
         given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
 
         classToTest.loadGames()
+
+        verify(view).displayGames(gamesList)
+
+    }
+
+    @Test
+    fun refreshesGames() {
+
+        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(view.getFilterText()).willReturn("")
+        given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
+
+        classToTest.refreshPulled()
 
         verify(view).displayGames(gamesList)
 
@@ -116,7 +130,20 @@ class GamesListPresenterTest {
 
         classToTest.loadGames()
 
-        verify(view).setLoading(true)
+        verify(view).setLoadingState(LoadingState.LOADING)
+
+    }
+
+    @Test
+    fun showsRefreshingWhenStartsToLoadAgain() {
+
+        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+
+        classToTest.loadGames()
+
+        classToTest.refreshPulled()
+
+        verify(view).setLoadingState(LoadingState.REFRESHING)
 
     }
 
@@ -127,7 +154,7 @@ class GamesListPresenterTest {
 
         classToTest.loadGames()
 
-        verify(view).setLoading(false)
+        verify(view).setLoadingState(LoadingState.DONE)
 
     }
 
@@ -138,7 +165,7 @@ class GamesListPresenterTest {
 
         classToTest.loadGames()
 
-        verify(view).setLoading(false)
+        verify(view).setLoadingState(LoadingState.DONE)
 
     }
 
