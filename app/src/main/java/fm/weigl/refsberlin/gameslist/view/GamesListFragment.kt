@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.base.BaseFragment
 import fm.weigl.refsberlin.databinding.GamesListFragmentBinding
+import fm.weigl.refsberlin.error.view.ErrorScreen
 import fm.weigl.refsberlin.gameslist.presenter.GamesListPresenter
-import fm.weigl.refsberlin.view.SnackbarView
 import javax.inject.Inject
 
 class GamesListFragment : BaseFragment() {
 
     @Inject lateinit var presenter: GamesListPresenter
     @Inject lateinit var gamesListView: GamesListView
-    @Inject lateinit var snackBar: SnackbarView
+    @Inject lateinit var errorScreen: ErrorScreen
     private lateinit var binding: GamesListFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,14 +26,15 @@ class GamesListFragment : BaseFragment() {
         activityComponent.inject(this)
 
         binding.viewModel = gamesListView
+        binding.errorScreen.error = errorScreen
 
-        presenter.snackBar = snackBar
-        snackBar.parentView = binding.root
+        presenter.errorScreen = errorScreen
+        errorScreen.delegate = presenter
         gamesListView.setViews(binding.rvGameslist)
         presenter.view = gamesListView
         gamesListView.eventDelegate = presenter
 
-        presenter.start()
+        presenter.loadGames()
 
         return binding.root
     }

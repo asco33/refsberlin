@@ -5,11 +5,12 @@ import fm.weigl.refdata.Game
 import fm.weigl.refsberlin.base.UINavigator
 import fm.weigl.refsberlin.calendar.CalendarEventCreator
 import fm.weigl.refsberlin.di.ActivityScope
+import fm.weigl.refsberlin.error.view.ErrorScreenDelegate
+import fm.weigl.refsberlin.error.view.IErrorScreen
 import fm.weigl.refsberlin.gameslist.net.GamesRepository
 import fm.weigl.refsberlin.gameslist.view.GamesListEventDelegate
 import fm.weigl.refsberlin.gameslist.view.IGamesListView
 import fm.weigl.refsberlin.rx.Schedulers
-import fm.weigl.refsberlin.view.ISnackbarView
 import javax.inject.Inject
 
 /**
@@ -22,19 +23,20 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
                                              private val filter: GamesFilter,
                                              private val eventCreator: CalendarEventCreator,
                                              private val uiNavigator: UINavigator)
-    : GamesListEventDelegate {
+    : GamesListEventDelegate, ErrorScreenDelegate {
 
     companion object {
         const val TAG = "GamesListPresenter"
     }
 
     lateinit var view: IGamesListView
-    lateinit var snackBar: ISnackbarView
+    lateinit var errorScreen: IErrorScreen
     private var games = listOf<Game>()
 
-    fun start() {
+    fun loadGames() {
 
         view.setLoading(true)
+        errorScreen.hideError()
 
         gamesRepository.getGames()
                 .subscribeOn(schedulers.new())
@@ -49,7 +51,7 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
                         {
                             Log.e(TAG, it.toString())
                             it.printStackTrace()
-                            snackBar.showSnackbar("$it ${it.message}")
+                            errorScreen.showError(it.toString())
                             view.setLoading(false)
                         })
 
@@ -64,4 +66,6 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
     override fun eventIconClickedForGame(game: Game) = eventCreator.createEventForGame(game)
 
     override fun navigationIconClickedForGame(game: Game) = uiNavigator.showNavigationToLocation(game.place.place)
+
+    override fun retryClicked() = loadGames()
 }

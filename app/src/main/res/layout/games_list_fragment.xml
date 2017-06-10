@@ -3,18 +3,18 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
-            type="fm.weigl.refsberlin.gameslist.view.GamesListView"/>
+            type="fm.weigl.refsberlin.gameslist.view.GamesListView" />
     </data>
 
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:context=".gameslist.view.GamesListFragment">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".gameslist.view.GamesListFragment">
 
         <EditText
             android:id="@+id/et_gameslist_filter"
@@ -30,7 +30,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:textColor="@android:color/white"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_gameslist"
@@ -40,13 +40,18 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:scrollbars="vertical"
-            android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"/>
+            android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}" />
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}"/>
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
+
+        <include
+            android:id="@+id/error_screen"
+            layout="@layout/error_screen" />
+
     </RelativeLayout>
 
 </layout>
