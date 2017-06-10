@@ -16,27 +16,46 @@
         android:layout_height="match_parent"
         tools:context=".gameslist.view.GamesListFragment">
 
-        <EditText
-            android:id="@+id/et_gameslist_filter"
+        <RelativeLayout
+            android:id="@+id/filter_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="4dp"
-            android:background="@color/colorPrimary"
-            android:hint="@string/hint_gameslist_filter"
-            android:inputType="text"
-            android:minHeight="56dp"
-            android:onTextChanged="@{viewModel.onTextChanged}"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:onClick="@{() -> viewModel.clearButtonClicked()}"
+                android:id="@+id/clear_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_clear" />
+
+            <EditText
+                android:id="@+id/et_gameslist_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_toLeftOf="@id/clear_button"
+                android:hint="@string/hint_gameslist_filter"
+                android:inputType="text"
+                android:minHeight="56dp"
+                android:onTextChanged="@{viewModel.onTextChanged}"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_gameslist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/et_gameslist_filter"
+            android:layout_above="@id/filter_container"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:scrollbars="vertical"

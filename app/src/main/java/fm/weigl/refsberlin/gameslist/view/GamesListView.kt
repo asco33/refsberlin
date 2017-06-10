@@ -33,7 +33,7 @@ class GamesListView @Inject constructor(
 
     val loading = ObservableBoolean(false)
 
-    lateinit var editText: EditText
+    private lateinit var editText: EditText
 
     var eventDelegate: GamesListEventDelegate? = null
         set(value) {
@@ -52,6 +52,8 @@ class GamesListView @Inject constructor(
     fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
         eventDelegate?.filterTextChanged()
     }
+
+    fun clearButtonClicked() = editText.setText("")
 
     override fun displayGames(games: List<Game>) {
         adapter.games = games

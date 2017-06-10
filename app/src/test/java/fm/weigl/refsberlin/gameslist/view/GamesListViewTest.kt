@@ -121,4 +121,13 @@ class GamesListViewTest {
 
     }
 
+    @Test
+    fun clearsEditTextWhenClearButtonClicked() {
+
+        classToTest.clearButtonClicked()
+
+        then(editText).should().setText("")
+
+    }
+
 }
