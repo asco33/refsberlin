@@ -11,8 +11,8 @@ android {
         applicationId "fm.weigl.refsberlin"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.2"
+        versionCode 6
+        versionName "1.2.1"
     }
     buildTypes {
         release {
