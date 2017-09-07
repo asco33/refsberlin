@@ -1,5 +1,3 @@
 /build
-/src/main/java/fm/weigl/refsberlin/security
 fabric.properties
 .
-/fm/weigl/refsberlin/security/ApiKey.kt

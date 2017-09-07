@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'io.fabric'
 apply plugin: 'kotlin-kapt'
+
+def bt
 
 android {
     compileSdkVersion 25
@@ -18,10 +19,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            bt = "release"
         }
 
         debug {
             applicationIdSuffix ".debug"
+            bt = "debug"
         }
     }
     sourceSets {
@@ -35,6 +38,10 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+}
+
+if (bt == "release") {
+    apply plugin: 'io.fabric'
 }
 
 dependencies {
