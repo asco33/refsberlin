@@ -15,7 +15,8 @@ import javax.inject.Provider
 interface GamesListEventDelegate {
     fun eventIconClickedForGame(game: Game)
     fun navigationIconClickedForGame(game: Game)
-    fun filterTextChanged(filterText: String)
+    fun filterTextChanged()
+    fun refreshPulled()
 }
 
 class GamesListAdapter @Inject constructor(

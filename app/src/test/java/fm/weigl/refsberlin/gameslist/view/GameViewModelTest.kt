@@ -9,7 +9,8 @@ import fm.weigl.refsberlin.TestGames.Companion.ref2
 import fm.weigl.refsberlin.android.ContextCompatWrapper
 import fm.weigl.refsberlin.gameslist.presenter.GameInfoFormatter
 import fm.weigl.refsberlin.view.TextHighlighter
-import org.junit.Assert
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,7 +43,7 @@ class GameViewModelTest {
 
     @Before
     fun setUp() {
-        classToTest = GameViewModel(highlighter, contextCompat, formatter)
+        classToTest = GameViewModel(contextCompat, highlighter, formatter)
 
         val teamsFormatted = "teamsFormatted"
         given(formatter.teams(game)).willReturn(teamsFormatted)
@@ -60,6 +61,7 @@ class GameViewModelTest {
     fun setsHighlighterColor() {
         val color = 55
         given(contextCompat.getColor(R.color.colorAccent)).willReturn(color)
+        classToTest = GameViewModel(contextCompat, highlighter, formatter)
 
         classToTest.setGameAndTextToHighlight(game, "")
 
@@ -80,7 +82,7 @@ class GameViewModelTest {
 
         classToTest.setGameAndTextToHighlight(game, textToHighlight)
 
-        Assert.assertEquals(teamsSpannable, classToTest.teams.get())
+        assertEquals(teamsSpannable, classToTest.teams.get())
 
     }
 
@@ -90,7 +92,16 @@ class GameViewModelTest {
 
         classToTest.setGameAndTextToHighlight(game, textToHighlight)
 
-        Assert.assertEquals(ref0Spannable, classToTest.ref0.get())
+        assertEquals(ref0Spannable, classToTest.ref0.get())
+
+    }
+
+    @Test
+    fun setsRefereeToNullIfNotExists() {
+
+        classToTest.setGameAndTextToHighlight(game, textToHighlight)
+
+        assertNull(classToTest.ref7.get())
 
     }
 

@@ -1,20 +1,22 @@
 package fm.weigl.refsberlin.gameslist.presenter
 
-import com.nhaarman.mockito_kotlin.argThat
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.then
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.TestGames.Companion.placeName
+import fm.weigl.refsberlin.base.LoadingState
 import fm.weigl.refsberlin.base.UINavigator
 import fm.weigl.refsberlin.calendar.CalendarEventCreator
+import fm.weigl.refsberlin.error.view.IErrorScreen
 import fm.weigl.refsberlin.gameslist.net.GamesRepository
 import fm.weigl.refsberlin.gameslist.view.IGamesListView
 import fm.weigl.refsberlin.rx.TestSchedulers
-import fm.weigl.refsberlin.view.ISnackbarView
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
@@ -27,7 +29,7 @@ class GamesListPresenterTest {
     @Mock lateinit var filter: GamesFilter
     @Mock lateinit var view: IGamesListView
     @Mock lateinit var eventCreator: CalendarEventCreator
-    @Mock lateinit var snackBar: ISnackbarView
+    @Mock lateinit var errorScreen: IErrorScreen
     @Mock lateinit var uiNavigator: UINavigator
     val schedulers = TestSchedulers()
 
@@ -42,15 +44,30 @@ class GamesListPresenterTest {
         MockitoAnnotations.initMocks(this)
         classToTest = GamesListPresenter(gamesRepository, schedulers, filter, eventCreator, uiNavigator)
         classToTest.view = view
-        classToTest.snackBar = snackBar
+        classToTest.errorScreen = errorScreen
     }
 
     @Test
     fun displayGames() {
 
         given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(view.getFilterText()).willReturn("")
+        given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
 
-        classToTest.start()
+        classToTest.loadGames()
+
+        verify(view).displayGames(gamesList)
+
+    }
+
+    @Test
+    fun refreshesGames() {
+
+        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(view.getFilterText()).willReturn("")
+        given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
+
+        classToTest.refreshPulled()
 
         verify(view).displayGames(gamesList)
 
@@ -59,13 +76,29 @@ class GamesListPresenterTest {
     @Test
     fun filtersGamesWhenFilterTextChanged() {
 
-        val filterString = "filter"
+        val filterText = "filter"
+        given(view.getFilterText()).willReturn(filterText)
         given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
-        given(filter.filterGames(gamesList, filterString)).willReturn(listOf(game2))
 
-        Mockito.reset(view)
-        classToTest.start()
-        classToTest.filterTextChanged(filterString)
+        classToTest.loadGames()
+
+        given(filter.filterGames(gamesList, filterText)).willReturn(listOf(game2))
+
+        classToTest.filterTextChanged()
+
+        verify(view).displayGames(listOf(game2))
+
+    }
+
+    @Test
+    fun filtersGamesAfterLoadingThem() {
+
+        val filterText = "filter"
+        given(filter.filterGames(gamesList, filterText)).willReturn(listOf(game2))
+        given(view.getFilterText()).willReturn(filterText)
+        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+
+        classToTest.loadGames()
 
         verify(view).displayGames(listOf(game2))
 
@@ -74,11 +107,12 @@ class GamesListPresenterTest {
     @Test
     fun passesFilterTextAsHighlightToView() {
 
-        val text = "text"
+        val filterText = "text"
+        given(view.getFilterText()).willReturn(filterText)
 
-        classToTest.filterTextChanged(text)
+        classToTest.filterTextChanged()
 
-        verify(view).highlightGamesWithText(text)
+        verify(view).highlightGamesWithText(filterText)
     }
 
     @Test
@@ -94,9 +128,22 @@ class GamesListPresenterTest {
 
         given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
 
-        classToTest.start()
+        classToTest.loadGames()
 
-        verify(view).setLoading(true)
+        verify(view).setLoadingState(LoadingState.LOADING)
+
+    }
+
+    @Test
+    fun showsRefreshingWhenStartsToLoadAgain() {
+
+        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+
+        classToTest.loadGames()
+
+        classToTest.refreshPulled()
+
+        verify(view).setLoadingState(LoadingState.REFRESHING)
 
     }
 
@@ -105,9 +152,9 @@ class GamesListPresenterTest {
 
         given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
 
-        classToTest.start()
+        classToTest.loadGames()
 
-        verify(view).setLoading(false)
+        verify(view).setLoadingState(LoadingState.DONE)
 
     }
 
@@ -116,26 +163,22 @@ class GamesListPresenterTest {
 
         given(gamesRepository.getGames()).willReturn(Observable.error(Throwable()))
 
-        classToTest.start()
+        classToTest.loadGames()
 
-        verify(view).setLoading(false)
+        verify(view).setLoadingState(LoadingState.DONE)
 
     }
 
     @Test
-    fun showsSnackbarOnError() {
+    fun showsError() {
 
-        val errorMessage = "errorMessage"
-        val error = Throwable(errorMessage)
+        val error = Throwable()
 
         given(gamesRepository.getGames()).willReturn(Observable.error(error))
 
-        classToTest.start()
+        classToTest.loadGames()
 
-        verify(snackBar).showSnackbar(argThat {
-            this.contains(errorMessage) &&
-                    this.contains(error.toString())
-        })
+        then(errorScreen).should().showError(error.toString())
 
     }
 

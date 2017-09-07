@@ -14,9 +14,11 @@ import javax.inject.Inject
  * Created by asco on 15.07.16.
  */
 
-class GameViewModel @Inject constructor(private val textHighlighter: TextHighlighter,
-                                        private val contextCompat: ContextCompatWrapper,
+class GameViewModel @Inject constructor(contextCompat: ContextCompatWrapper,
+                                        private val textHighlighter: TextHighlighter,
                                         private val gameInfoFormatter: GameInfoFormatter) {
+
+    val highlightColor = contextCompat.getColor(R.color.colorAccent)
 
     val teams = ObservableField<Spannable>()
     val date = ObservableField<String>()
@@ -35,7 +37,6 @@ class GameViewModel @Inject constructor(private val textHighlighter: TextHighlig
 
     fun setGameAndTextToHighlight(game: Game, highlightText: String) {
 
-        val highlightColor = contextCompat.getColor(R.color.colorAccent)
         textHighlighter.color = highlightColor
         textHighlighter.toHighlight = highlightText
 
@@ -50,42 +51,27 @@ class GameViewModel @Inject constructor(private val textHighlighter: TextHighlig
         location.set(textHighlighter.highlightText(game.place.place))
 
         // Referees
-        game.referees.getOrNull(0)?.apply {
-            ref0.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
-
-        game.referees.getOrNull(1)?.apply {
-            ref1.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
-
-        game.referees.getOrNull(2)?.apply {
-            ref2.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
-
-        game.referees.getOrNull(3)?.apply {
-            ref3.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
-
-        game.referees.getOrNull(4)?.apply {
-            ref4.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
-
-        game.referees.getOrNull(5)?.apply {
-            ref5.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
-
-        game.referees.getOrNull(6)?.apply {
-            ref6.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
-
-        game.referees.getOrNull(7)?.apply {
-            ref7.set(textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(this)))
-        }
+        ref0.set(getRefName(game, 0))
+        ref1.set(getRefName(game, 1))
+        ref2.set(getRefName(game, 2))
+        ref3.set(getRefName(game, 3))
+        ref4.set(getRefName(game, 4))
+        ref5.set(getRefName(game, 5))
+        ref6.set(getRefName(game, 6))
+        ref7.set(getRefName(game, 7))
 
     }
 
     fun eventIconClicked(view: View) = onEventIconClick()
 
     fun navigationIconClicked(view: View) = onNavigationIconClick()
+
+    fun getRefName(game: Game, index: Int): Spannable? {
+
+        val ref = game.referees.getOrNull(index)
+        if (ref == null) return null
+        else return textHighlighter.highlightText(gameInfoFormatter.refereeWithPosition(ref))
+
+    }
 
 }
