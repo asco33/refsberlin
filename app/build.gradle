@@ -35,6 +35,21 @@ android {
         enabled = true
     }
 
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
+        exclude 'META-INF/rxjava.properties'
+    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -66,6 +81,7 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true;
     }
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.7.22'
     testCompile('com.nhaarman:mockito-kotlin:1.4.0') {

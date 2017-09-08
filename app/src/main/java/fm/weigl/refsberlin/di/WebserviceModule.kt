@@ -6,7 +6,6 @@ import dagger.Module
 import dagger.Provides
 import fm.weigl.refsberlin.gameslist.net.GamesService
 import fm.weigl.refsberlin.net.WebConfig
-import fm.weigl.refsberlin.security.ApiKey
 import retrofit.GsonConverterFactory
 import retrofit.Retrofit
 import retrofit.RxJavaCallAdapterFactory
@@ -39,11 +38,7 @@ class WebserviceModule() {
 
         val interceptor = Interceptor { chain ->
             val original = chain!!.request();
-
-            val requestBuilder = original.newBuilder()
-                    .header(HEADER_KEY_AUTH, ApiKey.API_KEY)
-
-            val request = requestBuilder.build();
+            val request = original.newBuilder().build()
             chain.proceed(request)
         }
 
