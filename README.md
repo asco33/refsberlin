@@ -5,10 +5,6 @@ https://play.google.com/store/apps/details?id=fm.weigl.refsberlin
 
 RefsBerlin is a small open source app that displays the current american football game and referee fixtures within the AFCVBB football association (Berlin / Brandenburg). The app is written in Kotlin and uses a mixture of MVP and MVVM (databinding); Dagger2, RetroFit and RxJava.
 
-## Building the app
-If you want to build & run the app you have to 
-1. add your own `fabric.properties` file (or remove any Crashlytics stuff from the code)
-2. add your own `ApiKey` property (send me a message if you need one)
 
 ## Backend
 The backend project can be found here: https://github.com/asco33/refserver
