@@ -7,10 +7,6 @@ import dagger.Module
 import dagger.Provides
 import fm.weigl.refsberlin.base.BaseActivity
 
-/**
- * Created by asco on 1/31/17.
- */
-
 @Module
 class ActivityModule(private val activity: BaseActivity) {
 

@@ -6,9 +6,6 @@ import fm.weigl.refdata.GameReferee
 import fm.weigl.refdata.Team
 import java.util.*
 
-/**
- * Created by asco on 7/20/16.
- */
 class TestGames {
 
     companion object {

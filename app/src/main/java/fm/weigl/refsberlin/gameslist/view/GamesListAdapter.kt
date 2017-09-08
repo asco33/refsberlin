@@ -8,10 +8,6 @@ import fm.weigl.refsberlin.databinding.GameItemBinding
 import javax.inject.Inject
 import javax.inject.Provider
 
-/**
- * Created by asco on 15.07.16.
- */
-
 interface GamesListEventDelegate {
     fun eventIconClickedForGame(game: Game)
     fun navigationIconClickedForGame(game: Game)
@@ -37,9 +33,7 @@ class GamesListAdapter @Inject constructor(
             notifyDataSetChanged()
         }
 
-    override fun getItemCount(): Int {
-        return games.size
-    }
+    override fun getItemCount() = games.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): GameViewHolder {
 

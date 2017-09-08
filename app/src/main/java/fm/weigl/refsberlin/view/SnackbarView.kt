@@ -4,10 +4,6 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import javax.inject.Inject
 
-/**
- * Created by asco on 4/22/17.
- */
-
 interface ISnackbarView {
     fun showSnackbar(text: String)
 }

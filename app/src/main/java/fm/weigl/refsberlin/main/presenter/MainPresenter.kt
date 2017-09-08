@@ -4,9 +4,6 @@ import fm.weigl.refsberlin.di.ActivityScope
 import fm.weigl.refsberlin.main.view.NavigationDrawerDelegate
 import javax.inject.Inject
 
-/**
- * Created by asco on 4/27/17.
- */
 
 @ActivityScope
 class MainPresenter @Inject constructor(

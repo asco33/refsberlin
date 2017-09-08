@@ -4,9 +4,6 @@ import android.support.v7.widget.RecyclerView
 import fm.weigl.refdata.Game
 import fm.weigl.refsberlin.databinding.GameItemBinding
 
-/**
- * Created by asco on 15.07.16.
- */
 class GameViewHolder(
         private val binding: GameItemBinding,
         private val viewModel: GameViewModel) : RecyclerView.ViewHolder(binding.root

@@ -14,10 +14,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Created by asco on 6/10/17.
- */
-
 @RunWith(MockitoJUnitRunner::class)
 class ErrorScreenTest {
 

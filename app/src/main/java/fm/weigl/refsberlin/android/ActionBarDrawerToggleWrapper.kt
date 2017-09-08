@@ -6,9 +6,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import javax.inject.Inject
 
-/**
- * Created by asco on 5/23/17.
- */
 class ActionBarDrawerToggleWrapper @Inject constructor() {
 
     fun create(activity: Activity,

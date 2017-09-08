@@ -7,9 +7,6 @@ import fm.weigl.refsberlin.gameslist.net.GamesRepository
 import fm.weigl.refsberlin.rx.Schedulers
 import javax.inject.Singleton
 
-/**
- * Created by asco on 15.07.16.
- */
 @Singleton
 @Component(modules = arrayOf(AppModule::class, WebserviceModule::class))
 interface AppComponent {

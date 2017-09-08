@@ -9,9 +9,6 @@ import fm.weigl.refsberlin.tracking.Tracker
 import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
 
-/**
- * Created by asco on 15.07.16.
- */
 class App : Application() {
 
     private lateinit var appComponent: AppComponent

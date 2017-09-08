@@ -11,16 +11,8 @@ import retrofit.Retrofit
 import retrofit.RxJavaCallAdapterFactory
 import javax.inject.Singleton
 
-/**
- * Created by asco on 1/31/17.
- */
-
 @Module
-class WebserviceModule() {
-
-    companion object {
-        const val HEADER_KEY_AUTH = "Authorization"
-    }
+class WebserviceModule {
 
     @Provides
     @Singleton

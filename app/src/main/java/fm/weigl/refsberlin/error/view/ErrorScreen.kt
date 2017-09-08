@@ -5,9 +5,6 @@ import android.databinding.ObservableField
 import fm.weigl.refsberlin.R
 import javax.inject.Inject
 
-/**
- * Created by asco on 6/10/17.
- */
 
 interface IErrorScreen {
     fun showError(error: String)
@@ -27,7 +24,7 @@ class ErrorScreen @Inject constructor(
     var delegate: ErrorScreenDelegate? = null
 
     fun retryClicked() {
-       delegate?.retryClicked()
+        delegate?.retryClicked()
     }
 
     override fun showError(error: String) {

@@ -6,10 +6,6 @@ import android.widget.Toast
 import javax.inject.Inject
 
 
-/**
- * Created by asco on 6/10/17.
- */
-
 class Toaster @Inject constructor(
         private val context: Context
 ) {

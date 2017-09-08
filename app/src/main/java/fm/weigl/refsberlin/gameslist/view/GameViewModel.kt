@@ -10,10 +10,6 @@ import fm.weigl.refsberlin.gameslist.presenter.GameInfoFormatter
 import fm.weigl.refsberlin.view.TextHighlighter
 import javax.inject.Inject
 
-/**
- * Created by asco on 15.07.16.
- */
-
 class GameViewModel @Inject constructor(contextCompat: ContextCompatWrapper,
                                         private val textHighlighter: TextHighlighter,
                                         private val gameInfoFormatter: GameInfoFormatter) {

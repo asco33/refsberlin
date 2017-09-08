@@ -9,9 +9,6 @@ import fm.weigl.refsberlin.main.presenter.MainNavigator
 import fm.weigl.refsberlin.main.presenter.MainPresenter
 import javax.inject.Inject
 
-/**
- * Created by asco on 4/27/17.
- */
 class MainActivity : BaseActivity() {
 
     @Inject lateinit var presenter: MainPresenter

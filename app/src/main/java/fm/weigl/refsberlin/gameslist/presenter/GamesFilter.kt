@@ -3,9 +3,6 @@ package fm.weigl.refsberlin.gameslist.presenter
 import fm.weigl.refdata.Game
 import javax.inject.Inject
 
-/**
- * Created by asco on 15.07.16.
- */
 class GamesFilter @Inject constructor() {
 
 
@@ -19,7 +16,7 @@ class GamesFilter @Inject constructor() {
 
             it.homeTeam.name.contains(filterText, ignoreCase = true) ||
                     it.awayTeam.name.contains(filterText, ignoreCase = true) ||
-                    it.referees.filter { it.name.contains(filterText, ignoreCase = true) }.size > 0 ||
+                    it.referees.any { it.name.contains(filterText, ignoreCase = true) } ||
                     it.place.place.contains(filterText, ignoreCase = true)
 
         }

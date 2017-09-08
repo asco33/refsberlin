@@ -20,9 +20,6 @@ import org.mockito.BDDMockito.verify
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Created by asco on 4/19/17.
- */
 @RunWith(MockitoJUnitRunner::class)
 class CalendarEventCreatorTest {
 

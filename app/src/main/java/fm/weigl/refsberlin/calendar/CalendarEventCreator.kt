@@ -7,9 +7,6 @@ import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.base.UINavigator
 import javax.inject.Inject
 
-/**
- * Created by asco on 4/19/17.
- */
 class CalendarEventCreator @Inject constructor(
         private val uiNavigator: UINavigator,
         private val resources: Resources

@@ -13,10 +13,6 @@ import fm.weigl.refsberlin.base.LoadingState
 import fm.weigl.refsberlin.di.ActivityScope
 import javax.inject.Inject
 
-/**
- * Created by asco on 4/20/17.
- */
-
 interface IGamesListView {
     fun displayGames(games: List<Game>)
     fun highlightGamesWithText(text: String)

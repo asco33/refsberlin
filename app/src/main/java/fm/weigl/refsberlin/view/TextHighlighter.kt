@@ -4,9 +4,6 @@ import android.text.Spannable
 import android.text.style.BackgroundColorSpan
 import javax.inject.Inject
 
-/**
- * Created by asco on 7/20/16.
- */
 class TextHighlighter @Inject constructor() {
 
     var color = 0

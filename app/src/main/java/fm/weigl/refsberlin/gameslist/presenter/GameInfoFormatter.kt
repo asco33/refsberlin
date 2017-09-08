@@ -7,9 +7,6 @@ import fm.weigl.refsberlin.R
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
-/**
- * Created by asco on 4/20/17.
- */
 class GameInfoFormatter @Inject constructor(
         private val resources: Resources
 ) {

@@ -14,10 +14,6 @@ import fm.weigl.refsberlin.gameslist.view.IGamesListView
 import fm.weigl.refsberlin.rx.Schedulers
 import javax.inject.Inject
 
-/**
- * Created by asco on 15.07.16.
- */
-
 @ActivityScope
 class GamesListPresenter @Inject constructor(private val gamesRepository: GamesRepository,
                                              private val schedulers: Schedulers,

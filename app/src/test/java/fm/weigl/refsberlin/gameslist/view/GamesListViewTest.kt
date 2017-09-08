@@ -20,10 +20,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
-/**
- * Created by asco on 4/20/17.
- */
-
 @RunWith(MockitoJUnitRunner::class)
 class GamesListViewTest {
 

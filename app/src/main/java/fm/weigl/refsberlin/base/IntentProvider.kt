@@ -6,13 +6,13 @@ import android.provider.CalendarContract
 import android.provider.CalendarContract.Events
 import javax.inject.Inject
 
-
-/**
- * Created by asco on 4/19/17.
- */
 class IntentProvider @Inject constructor() {
 
-    fun createCalendarEventIntent(startTime: Long, endTime: Long, eventName: String, eventDescription: String, location: String): Intent {
+    fun createCalendarEventIntent(startTime: Long,
+                                  endTime: Long,
+                                  eventName: String,
+                                  eventDescription: String,
+                                  location: String): Intent {
         val intent = Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime)
@@ -26,7 +26,7 @@ class IntentProvider @Inject constructor() {
 
     fun showNavigationIntent(location: String): Intent {
         return Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?daddr=$location"))
+                      Uri.parse("http://maps.google.com/maps?daddr=$location"))
     }
 
 }
