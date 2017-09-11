@@ -9,7 +9,7 @@ import fm.weigl.refsberlin.gameslist.view.GamesListFragment
 import javax.inject.Inject
 
 interface IMainNavigator {
-    fun showGamesList()
+    fun showGamesList(onlyIfNothingElseShown: Boolean = false)
     fun showAboutTheApp()
 }
 
@@ -33,12 +33,14 @@ class MainNavigator @Inject constructor(
         }
     }
 
-    override fun showGamesList() {
+    override fun showGamesList(onlyIfNothingElseShown: Boolean) {
 
-        if (!isGamesListFragmentOnTop()) {
-            clearBackStackToShowGamesList()
-            showFragment(GamesListFragment(), false)
-        }
+        if (onlyIfNothingElseShown && !nothingShown()) return
+
+        if (isGamesListFragmentOnTop()) return
+
+        clearBackStackToShowGamesList()
+        showFragment(GamesListFragment(), false)
     }
 
     override fun showAboutTheApp() {
@@ -59,6 +61,8 @@ class MainNavigator @Inject constructor(
 
         delegate?.fragmentChanged(fragment)
     }
+
+    private fun nothingShown() = currentFragment() == null
 
     private fun currentFragment(): Fragment? = fragmentManager.findFragmentById(R.id.main_content_container)
 

@@ -10,7 +10,7 @@ class MainPresenter @Inject constructor(
         private val mainNavigator: MainNavigator
 ) : NavigationDrawerDelegate {
 
-    fun start() = mainNavigator.showGamesList()
+    fun start() = mainNavigator.showGamesList(onlyIfNothingElseShown = true)
 
     override fun gamesListSelected() = mainNavigator.showGamesList()
 

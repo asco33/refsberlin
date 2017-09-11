@@ -23,16 +23,16 @@ class MainPresenterTest {
 
         classToTest.start()
 
-        then(navigator).should().showGamesList()
+        then(navigator).should().showGamesList(true)
 
     }
 
     @Test
-    fun showsGamesList() {
+    fun showsGamesListWhenSelected() {
 
         classToTest.gamesListSelected()
 
-        then(navigator).should().showGamesList()
+        then(navigator).should().showGamesList(false)
 
     }
 

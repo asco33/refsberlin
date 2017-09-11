@@ -65,6 +65,16 @@ class MainNavigatorTest {
     }
 
     @Test
+    fun notShowsGamesListIfSomethingElseAlreadyShown() {
+
+        given(fragmentManager.findFragmentById(R.id.main_content_container)).willReturn(AboutTheAppFragment())
+
+        classToTest.showGamesList(onlyIfNothingElseShown = true)
+
+        then(fragmentManager).should(never()).beginTransaction()
+    }
+
+    @Test
     fun showsAboutTheApp() {
 
         mockTransAction()
