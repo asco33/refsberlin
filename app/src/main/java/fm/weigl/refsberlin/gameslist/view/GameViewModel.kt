@@ -14,7 +14,7 @@ class GameViewModel @Inject constructor(contextCompat: ContextCompatWrapper,
                                         private val textHighlighter: TextHighlighter,
                                         private val gameInfoFormatter: GameInfoFormatter) {
 
-    val highlightColor = contextCompat.getColor(R.color.colorPrimary)
+    val highlightColor = contextCompat.getColor(R.color.colorAccent)
 
     val teams = ObservableField<Spannable>()
     val date = ObservableField<String>()
