@@ -5,6 +5,7 @@ import dagger.Component
 import fm.weigl.refsberlin.base.App
 import fm.weigl.refsberlin.gameslist.net.GamesRepository
 import fm.weigl.refsberlin.rx.Schedulers
+import fm.weigl.refsberlin.update.net.AppVersionRepository
 import javax.inject.Singleton
 
 @Singleton
@@ -12,6 +13,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun injectTo(app: App)
     fun gamesRepository(): GamesRepository
+    fun appVersionRepository(): AppVersionRepository
     fun schedulers(): Schedulers
     fun resources(): Resources
 }

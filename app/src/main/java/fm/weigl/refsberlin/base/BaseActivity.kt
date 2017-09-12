@@ -9,17 +9,27 @@ import fm.weigl.refsberlin.di.DaggerActivityComponent
 abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var activityComponent: ActivityComponent
-
-    private fun appComponent() = (applicationContext as App).getAppComponent()
+    private var mainLifecycleDelegates = emptyList<MainLifecycleDelegate>()
     private var extraLifecycleDelegates = emptyList<ExtraLifecycleDelegate>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activityComponent = DaggerActivityComponent.builder().appComponent(appComponent()).activityModule(ActivityModule(
-                this)).build()
+        activityComponent = DaggerActivityComponent.builder()
+                .appComponent(appComponent())
+                .activityModule(ActivityModule(this))
+                .build()
+
+        componentReady(activityComponent)
+
+        mainLifecycleDelegates.forEach { it.onCreate(savedInstanceState) }
     }
 
+    abstract fun componentReady(component: ActivityComponent)
+
+    protected fun setMainLifecycleDelegates(vararg delegates: MainLifecycleDelegate) {
+        mainLifecycleDelegates = delegates.toList()
+    }
 
     protected fun setExtraLifecycleDelegates(vararg delegates: ExtraLifecycleDelegate) {
         extraLifecycleDelegates = delegates.toList()
@@ -42,5 +52,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
         if (isChangingConfigurations) extraLifecycleDelegates = emptyList()
     }
+
+    private fun appComponent() = (applicationContext as App).getAppComponent()
 
 }

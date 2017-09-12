@@ -1,5 +1,7 @@
 package fm.weigl.refsberlin.main.presenter
 
+import android.os.Bundle
+import fm.weigl.refsberlin.base.MainLifecycleDelegate
 import fm.weigl.refsberlin.di.ActivityScope
 import fm.weigl.refsberlin.main.view.NavigationDrawerDelegate
 import javax.inject.Inject
@@ -8,9 +10,11 @@ import javax.inject.Inject
 @ActivityScope
 class MainPresenter @Inject constructor(
         private val mainNavigator: MainNavigator
-) : NavigationDrawerDelegate {
+) : NavigationDrawerDelegate, MainLifecycleDelegate {
 
-    fun start() = mainNavigator.showGamesList(onlyIfNothingElseShown = true)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        mainNavigator.showGamesList(onlyIfNothingElseShown = true)
+    }
 
     override fun gamesListSelected() = mainNavigator.showGamesList()
 
