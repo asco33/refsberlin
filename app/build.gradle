@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
 
-def bt = ""
 
 android {
     compileSdkVersion 26
@@ -20,12 +20,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            bt = "release"
         }
 
         debug {
             applicationIdSuffix ".debug"
-            bt = "debug"
         }
     }
     sourceSets {
@@ -56,10 +54,6 @@ android {
     }
 }
 
-if (bt == "release") {
-    apply plugin: 'io.fabric'
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:26.0.2'
@@ -79,7 +73,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     kapt 'com.android.databinding:compiler:2.3.0'
     compile 'io.reactivex:rxkotlin:0.60.0'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true;
     }
     testCompile 'junit:junit:4.12'

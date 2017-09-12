@@ -21,10 +21,10 @@
             </intent-filter>
         </activity>
 
-        <!--is read from fabrics.properties (not included on git)-->
+        <!--only present in release buildtype-->
         <!--<meta-data-->
-        <!--android:name="io.fabric.ApiKey"-->
-        <!--android:value="" />-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="xy" />-->
 
     </application>
 
