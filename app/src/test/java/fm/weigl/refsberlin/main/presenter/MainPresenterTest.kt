@@ -21,7 +21,7 @@ class MainPresenterTest {
     @Test
     fun showsGamesListAtStart() {
 
-        classToTest.start()
+        classToTest.onCreate(null)
 
         then(navigator).should().showGamesList(true)
 

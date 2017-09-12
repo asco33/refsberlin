@@ -7,18 +7,22 @@ import fm.weigl.refsberlin.databinding.MainActivityBinding
 import fm.weigl.refsberlin.di.ActivityComponent
 import fm.weigl.refsberlin.main.presenter.MainNavigator
 import fm.weigl.refsberlin.main.presenter.MainPresenter
+import fm.weigl.refsberlin.update.presenter.UpdateDialogPresenter
+import fm.weigl.refsberlin.update.view.UpdateDialogView
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    @Inject lateinit var presenter: MainPresenter
+    @Inject lateinit var mainPresenter: MainPresenter
+    @Inject lateinit var updatePresenter: UpdateDialogPresenter
+    @Inject lateinit var updateView: UpdateDialogView
     @Inject lateinit var navigationDrawerView: NavigationDrawerView
     @Inject lateinit var mainNavigator: MainNavigator
 
     override fun componentReady(component: ActivityComponent) {
         component.inject(this)
 
-        setMainLifecycleDelegates(presenter)
+        setMainLifecycleDelegates(mainPresenter, updatePresenter)
         setExtraLifecycleDelegates(navigationDrawerView)
 
         val binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
@@ -27,9 +31,10 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
 
         navigationDrawerView.setViews(binding.drawerLayout, binding.navView, toolbar)
-        navigationDrawerView.delegate = presenter
+        navigationDrawerView.delegate = mainPresenter
 
         mainNavigator.delegate = navigationDrawerView
+        updatePresenter.updateView = updateView
     }
 
 }
