@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fmweigl/refsberlin.svg?branch=develop)](https://travis-ci.org/fmweigl/refsberlin)
+
 # RefsBerlin
 
 
