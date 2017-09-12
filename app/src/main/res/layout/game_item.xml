@@ -149,6 +149,62 @@
                         android:text="@{game.ref7}"
                         android:visibility="@{game.ref7 == null ? View.GONE : View.VISIBLE}" />
 
+                    <TextView
+                        android:id="@+id/tv_game_ref8"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{game.ref8}"
+                        android:visibility="@{game.ref8 == null ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/tv_game_ref9"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{game.ref9}"
+                        android:visibility="@{game.ref9 == null ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/tv_game_ref10"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{game.ref10}"
+                        android:visibility="@{game.ref10 == null ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/tv_game_ref11"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{game.ref11}"
+                        android:visibility="@{game.ref11 == null ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/tv_game_ref12"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{game.ref12}"
+                        android:visibility="@{game.ref12 == null ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/tv_game_ref13"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{game.ref13}"
+                        android:visibility="@{game.ref13 == null ? View.GONE : View.VISIBLE}" />
+
+                    <TextView
+                        android:id="@+id/tv_game_ref14"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{game.ref14}"
+                        android:visibility="@{game.ref14 == null ? View.GONE : View.VISIBLE}" />
+
                 </LinearLayout>
 
             </RelativeLayout>

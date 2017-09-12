@@ -27,6 +27,13 @@ class GameViewModel @Inject constructor(contextCompat: ContextCompatWrapper,
     val ref5 = ObservableField<Spannable>()
     val ref6 = ObservableField<Spannable>()
     val ref7 = ObservableField<Spannable>()
+    val ref8 = ObservableField<Spannable>()
+    val ref9 = ObservableField<Spannable>()
+    val ref10 = ObservableField<Spannable>()
+    val ref11 = ObservableField<Spannable>()
+    val ref12 = ObservableField<Spannable>()
+    val ref13 = ObservableField<Spannable>()
+    val ref14 = ObservableField<Spannable>()
 
     var onEventIconClick: () -> Unit = {}
     var onNavigationIconClick: () -> Unit = {}
@@ -55,6 +62,13 @@ class GameViewModel @Inject constructor(contextCompat: ContextCompatWrapper,
         ref5.set(getRefName(game, 5))
         ref6.set(getRefName(game, 6))
         ref7.set(getRefName(game, 7))
+        ref8.set(getRefName(game, 8))
+        ref9.set(getRefName(game, 9))
+        ref10.set(getRefName(game, 10))
+        ref11.set(getRefName(game, 11))
+        ref12.set(getRefName(game, 12))
+        ref13.set(getRefName(game, 13))
+        ref14.set(getRefName(game, 14))
 
     }
 
