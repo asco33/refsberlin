@@ -10,7 +10,7 @@ RefsBerlin is a small open source app that displays the current american footbal
 
 
 ## Backend
-The backend project can be found here: https://github.com/asco33/refserver
+The backend project can be found here: https://github.com/fmweigl/refserver
 
 
 ## License
