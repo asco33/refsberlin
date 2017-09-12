@@ -20,14 +20,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_game_teams"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:padding="16dp"
                 android:text="@{game.teams}"
                 tools:text="Berlin Bears - Cottbus Crayfish" />
 
@@ -62,7 +63,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/game_options"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
 
                     <TextView
@@ -90,6 +92,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="@{game.ref0}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref0 == null ? View.GONE : View.VISIBLE}"
                         tools:text="Max Musterref" />
 
@@ -99,6 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref1}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref1 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -107,6 +111,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref2}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref2 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -115,6 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref3}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref3 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -123,6 +129,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref4}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref4 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -131,6 +138,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref5}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref5 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -139,6 +147,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref6}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref6 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -147,6 +156,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref7}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref7 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -155,6 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref8}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref8 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -163,6 +174,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref9}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref9 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -171,6 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref10}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref10 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -179,6 +192,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref11}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref11 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -187,6 +201,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref12}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref12 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -195,6 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref13}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref13 == null ? View.GONE : View.VISIBLE}" />
 
                     <TextView
@@ -203,6 +219,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{game.ref14}"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="@{game.ref14 == null ? View.GONE : View.VISIBLE}" />
 
                 </LinearLayout>

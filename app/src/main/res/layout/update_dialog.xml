@@ -5,24 +5,25 @@
 
         <variable
             name="appVersion"
-            type="fm.weigl.refdata.appversion.AppVersion"/>
+            type="fm.weigl.refdata.appversion.AppVersion" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#22000000"
+            android:background="@color/colorPrimaryDark"
             android:paddingBottom="4dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="4dp"
             android:text="@string/label_update_available"
-            android:textSize="24sp"/>
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
             android:text="@{@string/update_version(appVersion.versionName)}"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -43,7 +44,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{appVersion.description}"/>
+                android:text="@{appVersion.description}" />
 
         </ScrollView>
 
