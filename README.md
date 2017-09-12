@@ -1,11 +1,10 @@
-[![Build Status](https://travis-ci.org/fmweigl/refsberlin.svg?branch=develop)](https://travis-ci.org/fmweigl/refsberlin)
-
-<a href='https://play.google.com/store/apps/details?id=fm.weigl.refsberlin&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="62" width="161"/></a>
-
 # RefsBerlin
 
+[![Build Status](https://travis-ci.org/fmweigl/refsberlin.svg?branch=develop)](https://travis-ci.org/fmweigl/refsberlin) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+<a href='https://play.google.com/store/apps/details?id=fm.weigl.refsberlin&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/badge_new.png'/></a>
 
-https://play.google.com/store/apps/details?id=fm.weigl.refsberlin
+
+
 
 RefsBerlin is a small open source app that displays the current american football game and referee fixtures within the AFCVBB football association (Berlin / Brandenburg). The app is written in Kotlin and uses a mixture of MVP and MVVM (databinding); Dagger2, RetroFit and RxJava.
 
