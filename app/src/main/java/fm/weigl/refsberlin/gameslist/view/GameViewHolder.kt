@@ -1,7 +1,7 @@
 package fm.weigl.refsberlin.gameslist.view
 
 import android.support.v7.widget.RecyclerView
-import fm.weigl.refdata.Game
+import fm.weigl.refdata.games.Game
 import fm.weigl.refsberlin.databinding.GameItemBinding
 
 class GameViewHolder(

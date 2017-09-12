@@ -1,6 +1,6 @@
 package fm.weigl.refsberlin.gameslist.presenter
 
-import fm.weigl.refdata.Game
+import fm.weigl.refdata.games.Game
 import javax.inject.Inject
 
 class GamesFilter @Inject constructor() {

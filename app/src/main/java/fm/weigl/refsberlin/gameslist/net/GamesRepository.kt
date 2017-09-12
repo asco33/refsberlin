@@ -1,6 +1,6 @@
 package fm.weigl.refsberlin.gameslist.net
 
-import fm.weigl.refdata.Game
+import fm.weigl.refdata.games.Game
 import rx.Observable
 import javax.inject.Inject
 import javax.inject.Singleton

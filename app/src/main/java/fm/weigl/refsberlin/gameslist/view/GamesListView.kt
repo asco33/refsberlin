@@ -6,7 +6,7 @@ import android.databinding.ObservableField
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.EditText
-import fm.weigl.refdata.Game
+import fm.weigl.refdata.games.Game
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.android.Toaster
 import fm.weigl.refsberlin.base.LoadingState

@@ -1,8 +1,8 @@
 package fm.weigl.refsberlin.gameslist.presenter
 
 import android.content.res.Resources
-import fm.weigl.refdata.Game
-import fm.weigl.refdata.GameReferee
+import fm.weigl.refdata.games.Game
+import fm.weigl.refdata.games.GameReferee
 import fm.weigl.refsberlin.R
 import java.text.SimpleDateFormat
 import javax.inject.Inject

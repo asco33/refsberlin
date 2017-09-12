@@ -1,7 +1,7 @@
 package fm.weigl.refsberlin.gameslist.presenter
 
 import android.util.Log
-import fm.weigl.refdata.Game
+import fm.weigl.refdata.games.Game
 import fm.weigl.refsberlin.base.LoadingState
 import fm.weigl.refsberlin.base.UINavigator
 import fm.weigl.refsberlin.calendar.CalendarEventCreator

@@ -1,9 +1,9 @@
 package fm.weigl.refsberlin
 
-import fm.weigl.refdata.Game
-import fm.weigl.refdata.GamePlace
-import fm.weigl.refdata.GameReferee
-import fm.weigl.refdata.Team
+import fm.weigl.refdata.games.Game
+import fm.weigl.refdata.games.GamePlace
+import fm.weigl.refdata.games.GameReferee
+import fm.weigl.refdata.games.Team
 import java.util.*
 
 class TestGames {

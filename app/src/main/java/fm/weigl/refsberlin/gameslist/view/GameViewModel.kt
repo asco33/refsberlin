@@ -3,7 +3,7 @@ package fm.weigl.refsberlin.gameslist.view
 import android.databinding.ObservableField
 import android.text.Spannable
 import android.view.View
-import fm.weigl.refdata.Game
+import fm.weigl.refdata.games.Game
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.android.ContextCompatWrapper
 import fm.weigl.refsberlin.gameslist.presenter.GameInfoFormatter

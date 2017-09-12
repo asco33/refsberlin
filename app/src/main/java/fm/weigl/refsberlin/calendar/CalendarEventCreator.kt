@@ -2,7 +2,7 @@ package fm.weigl.refsberlin.calendar
 
 import android.content.res.Resources
 import android.text.format.DateUtils
-import fm.weigl.refdata.Game
+import fm.weigl.refdata.games.Game
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.base.UINavigator
 import javax.inject.Inject
@@ -25,8 +25,8 @@ class CalendarEventCreator @Inject constructor(
             crew = crew
                     .plus("\n")
                     .plus(resources.getString(R.string.referee_representation,
-                            it.name,
-                            it.position.toString()))
+                                              it.name,
+                                              it.position))
         }
 
         val location = game.place.place
