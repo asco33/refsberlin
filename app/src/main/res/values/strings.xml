@@ -12,4 +12,9 @@
     <string name="error">Es ist ein Fehler aufgetreten \n%1$s</string>
     <string name="retry">Wiederholen</string>
     <string name="number_of_games">%1$d Spiele</string>
+    <string name="label_update_available">Update verfügbar</string>
+    <string name="update_version">Version: %1$s</string>
+    <string name="update_dialog_button_update">Jetzt updaten</string>
+    <string name="update_dialog_button_no_thanks">Nein danke</string>
+
 </resources>

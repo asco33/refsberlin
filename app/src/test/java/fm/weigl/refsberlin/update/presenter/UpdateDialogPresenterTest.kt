@@ -3,6 +3,7 @@ package fm.weigl.refsberlin.update.presenter
 import com.nhaarman.mockito_kotlin.*
 import fm.weigl.refdata.appversion.AppVersion
 import fm.weigl.refsberlin.base.AppMeta
+import fm.weigl.refsberlin.navigation.GeneralNavigator
 import fm.weigl.refsberlin.rx.TestSchedulers
 import fm.weigl.refsberlin.update.net.AppVersionRepository
 import fm.weigl.refsberlin.update.view.IUpdateDialogView
@@ -14,10 +15,11 @@ class UpdateDialogPresenterTest {
 
     val appVersionRepository: AppVersionRepository = mock()
     val appMeta: AppMeta = mock()
+    val navigator: GeneralNavigator = mock()
     val schedulers = TestSchedulers()
     val updateView: IUpdateDialogView = mock()
 
-    val classToTest = UpdateDialogPresenter(appVersionRepository, appMeta, schedulers)
+    val classToTest = UpdateDialogPresenter(appVersionRepository, appMeta, navigator, schedulers)
 
     @Before
     fun setUp() {
@@ -65,6 +67,15 @@ class UpdateDialogPresenterTest {
 
         then(updateView).should(never()).showUpdateDialog(any())
 
+
+    }
+
+    @Test
+    fun opensPlaystoreOnUpdateClick() {
+
+        classToTest.updateClicked()
+
+        then(navigator).should().showPlayStorePage()
 
     }
 

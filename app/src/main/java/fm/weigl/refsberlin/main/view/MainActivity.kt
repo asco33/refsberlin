@@ -35,6 +35,7 @@ class MainActivity : BaseActivity() {
 
         mainNavigator.delegate = navigationDrawerView
         updatePresenter.updateView = updateView
+        updateView.delegate = updatePresenter
     }
 
 }
