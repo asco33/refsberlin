@@ -47,15 +47,17 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
+                        android:background="?attr/selectableItemBackground"
                         android:onClick="@{game.navigationIconClicked}"
-                        android:src="@drawable/ic_navigation" />
+                        app:srcCompat="@drawable/ic_navigation" />
 
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_marginTop="16dp"
+                        android:background="?attr/selectableItemBackground"
                         android:onClick="@{game.eventIconClicked}"
-                        android:src="@drawable/ic_event" />
+                        app:srcCompat="@drawable/ic_event" />
 
                 </LinearLayout>
 
