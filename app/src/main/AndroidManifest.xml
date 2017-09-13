@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fm.weigl.refsberlin">
+<manifest package="fm.weigl.refsberlin"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".base.App"
@@ -15,16 +15,16 @@
             android:name=".main.view.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!--only present in release buildtype-->
-        <!--<meta-data-->
-            <!--android:name="io.fabric.ApiKey"-->
-            <!--android:value="xy" />-->
+        <!--add your own api key here-->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="26a6eeb108613d425be8ad7f115674fde5d74f68"/>
 
     </application>
 
