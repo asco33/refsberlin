@@ -14,14 +14,13 @@ class AboutTheAppFragment : BaseFragment() {
 
     @Inject lateinit var viewModel: AboutTheAppViewModel
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         activityComponent.inject(this)
 
         val binding = DataBindingUtil.inflate<AboutTheAppFragmentBinding>(inflater,
-                                                                          R.layout.about_the_app_fragment,
-                                                                          container,
-                                                                          false)
+                R.layout.about_the_app_fragment,
+                container,
+                false)
 
         binding.model = viewModel
 

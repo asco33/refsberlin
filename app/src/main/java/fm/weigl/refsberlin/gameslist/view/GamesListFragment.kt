@@ -20,7 +20,7 @@ class GamesListFragment : BaseFragment() {
     @Inject lateinit var errorScreen: ErrorScreen
     private lateinit var binding: GamesListFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.games_list_fragment, container, false)
 
         activityComponent.inject(this)
