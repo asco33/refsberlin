@@ -26,7 +26,7 @@ class GamesListFragment : BaseFragment() {
         activityComponent.inject(this)
 
         binding.viewModel = gamesListView
-        binding.errorScreen.error = errorScreen
+        binding.errorScreen!!.error = errorScreen
 
         presenter.errorScreen = errorScreen
         errorScreen.delegate = presenter

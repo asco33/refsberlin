@@ -27,7 +27,7 @@ class MainActivity : BaseActivity() {
 
         val binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
 
-        val toolbar = binding.mainInclude.toolbar
+        val toolbar = binding.mainInclude!!.toolbar
         setSupportActionBar(toolbar)
 
         navigationDrawerView.setViews(binding.drawerLayout, binding.navView, toolbar)
