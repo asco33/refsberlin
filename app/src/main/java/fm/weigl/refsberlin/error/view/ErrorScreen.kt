@@ -23,15 +23,9 @@ class ErrorScreen @Inject constructor(
 
     var delegate: ErrorScreenDelegate? = null
 
-    fun retryClicked() {
-        delegate?.retryClicked()
-    }
+    fun retryClicked() = delegate?.retryClicked()
 
-    override fun showError(error: String) {
-        this.error.set(resources.getString(R.string.error, error))
-    }
+    override fun showError(error: String) = this.error.set(resources.getString(R.string.error, error))
 
-    override fun hideError() {
-        error.set(null)
-    }
+    override fun hideError() = error.set(null)
 }
