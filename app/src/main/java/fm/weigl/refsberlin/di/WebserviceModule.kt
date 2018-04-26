@@ -1,15 +1,14 @@
 package fm.weigl.refsberlin.di
 
-import com.squareup.okhttp.Interceptor
-import com.squareup.okhttp.OkHttpClient
 import dagger.Module
 import dagger.Provides
 import fm.weigl.refsberlin.gameslist.net.GamesService
 import fm.weigl.refsberlin.net.WebConfig
 import fm.weigl.refsberlin.update.net.AppVersionService
-import retrofit.GsonConverterFactory
-import retrofit.Retrofit
-import retrofit.RxJavaCallAdapterFactory
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -25,23 +24,8 @@ class WebserviceModule {
 
     private fun gamesRetrofit() = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-            .client(okHttpClient())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(OkHttpClient())
             .baseUrl(WebConfig.GAMES_URL)
             .build()
-
-    private fun okHttpClient(): OkHttpClient {
-
-        val interceptor = Interceptor { chain ->
-            val original = chain!!.request();
-            val request = original.newBuilder().build()
-            chain.proceed(request)
-        }
-
-        val client = OkHttpClient()
-        client.interceptors().add(interceptor)
-        return client
-
-    }
-
 }

@@ -1,6 +1,6 @@
 package fm.weigl.refsberlin.base
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import fm.weigl.refsberlin.di.AppComponent
 import fm.weigl.refsberlin.di.AppModule
@@ -9,11 +9,12 @@ import fm.weigl.refsberlin.tracking.Tracker
 import io.fabric.sdk.android.Fabric
 import javax.inject.Inject
 
-class App : Application() {
+class App : MultiDexApplication() {
 
-    private lateinit var appComponent: AppComponent
+    lateinit var appComponent: AppComponent
 
-    @Inject lateinit var tracker: Tracker
+    @Inject
+    lateinit var tracker: Tracker
 
     override fun onCreate() {
         super.onCreate()
@@ -29,10 +30,6 @@ class App : Application() {
 
         tracker.trackAppStart()
 
-    }
-
-    fun getAppComponent(): AppComponent {
-        return appComponent
     }
 
 }

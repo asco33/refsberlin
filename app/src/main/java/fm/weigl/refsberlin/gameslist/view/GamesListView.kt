@@ -18,6 +18,7 @@ interface IGamesListView {
     fun highlightGamesWithText(text: String)
     fun setLoadingState(state: LoadingState)
     fun getFilterText(): String
+    fun isEmpty(): Boolean
 }
 
 @ActivityScope
@@ -66,4 +67,6 @@ class GamesListView @Inject constructor(
     override fun setLoadingState(state: LoadingState) = loadingState.set(state)
 
     override fun getFilterText(): String = editText.text.toString().trim()
+
+    override fun isEmpty() = adapter.itemCount == 0
 }

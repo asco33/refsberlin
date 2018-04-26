@@ -1,10 +1,11 @@
 package fm.weigl.refsberlin.gameslist.net
 
 import fm.weigl.refdata.games.Games
-import rx.Observable
+import io.reactivex.Single
+import retrofit2.http.GET
 
 interface GamesService {
-    @retrofit.http.GET("/games")
-    fun listGames(): Observable<Games>
+    @GET("/games")
+    fun getGames(): Single<Games>
 
 }

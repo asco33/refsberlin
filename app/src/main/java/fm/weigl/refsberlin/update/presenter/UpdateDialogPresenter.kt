@@ -5,17 +5,17 @@ import fm.weigl.refdata.appversion.AppVersion
 import fm.weigl.refsberlin.base.AppMeta
 import fm.weigl.refsberlin.base.MainLifecycleDelegate
 import fm.weigl.refsberlin.navigation.GeneralNavigator
-import fm.weigl.refsberlin.rx.Schedulers
 import fm.weigl.refsberlin.update.net.AppVersionRepository
 import fm.weigl.refsberlin.update.view.IUpdateDialogView
 import fm.weigl.refsberlin.update.view.UpdateDialogDelegate
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class UpdateDialogPresenter @Inject constructor(
         private val appVersionRepository: AppVersionRepository,
         private val appMeta: AppMeta,
-        private val navigator: GeneralNavigator,
-        private val schedulers: Schedulers
+        private val navigator: GeneralNavigator
 ) : MainLifecycleDelegate, UpdateDialogDelegate {
 
     lateinit var updateView: IUpdateDialogView
@@ -24,15 +24,14 @@ class UpdateDialogPresenter @Inject constructor(
         if (savedInstanceState != null) return
 
         appVersionRepository.appVersion()
-                .subscribeOn(schedulers.new())
-                .observeOn(schedulers.main())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
                             appVersionLoaded(it)
                         }, {
-                            it.printStackTrace()
-                        }
-                )
+                    it.printStackTrace()
+                })
     }
 
     override fun updateClicked() = navigator.showPlayStorePage()

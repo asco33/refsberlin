@@ -1,30 +1,24 @@
 package fm.weigl.refsberlin.error.view
 
 import android.content.res.Resources
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.given
-import com.nhaarman.mockito_kotlin.then
+import com.nhaarman.mockito_kotlin.*
 import fm.weigl.refsberlin.R
+import fm.weigl.refsberlin.android.Toaster
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class ErrorScreenTest {
 
-    @Mock lateinit var resources: Resources
-    @Mock lateinit var delegate: ErrorScreenDelegate
+    val toaster: Toaster = mock()
+    val resources: Resources = mock()
+    val delegate: ErrorScreenDelegate = mock()
 
-    lateinit var classToTest: ErrorScreen
+    val classToTest = ErrorScreen(toaster, resources)
 
     @Before
     fun setUp() {
-        classToTest = ErrorScreen(resources)
         classToTest.delegate = delegate
     }
 
@@ -34,9 +28,9 @@ class ErrorScreenTest {
         val error = "error"
         val errorMessage = "errorMessage"
 
-        given(resources.getString(R.string.error, error)).willReturn(errorMessage)
+        given(resources.getString(R.string.error_w_reason, error)).willReturn(errorMessage)
 
-        classToTest.showError(error)
+        classToTest.showMajorError(error)
 
         assertEquals(errorMessage, classToTest.error.get())
 
@@ -45,9 +39,9 @@ class ErrorScreenTest {
     @Test
     fun clearsErrorMessage() {
 
-        given(resources.getString(eq(R.string.error), any())).willReturn("error")
+        given(resources.getString(eq(R.string.error_w_reason), any())).willReturn("error")
 
-        classToTest.showError("error")
+        classToTest.showMajorError("error")
 
         classToTest.hideError()
 
@@ -61,6 +55,18 @@ class ErrorScreenTest {
         classToTest.retryClicked()
 
         then(delegate).should().retryClicked()
+
+    }
+
+    @Test
+    fun showsToastOnMinorError() {
+
+        val error = "error"
+        given(resources.getString(R.string.error)).willReturn(error)
+
+        classToTest.showMinorError()
+
+        then(toaster).should().showToast(error)
 
     }
 

@@ -15,26 +15,21 @@ import fm.weigl.refsberlin.base.LoadingState
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class GamesListViewTest {
 
-    @Mock lateinit var activity: Activity
-    @Mock lateinit var toaster: Toaster
-    @Mock lateinit var resources: Resources
-    @Mock lateinit var adapter: GamesListAdapter
-    @Mock lateinit var delegate: GamesListEventDelegate
-    @Mock lateinit var editText: EditText
+    val activity: Activity = mock()
+    val toaster: Toaster = mock()
+    val resources: Resources = mock()
+    val adapter: GamesListAdapter = mock()
+    val delegate: GamesListEventDelegate = mock()
+    val editText: EditText = mock()
 
-    lateinit var classToTest: GamesListView
+    val classToTest = GamesListView(adapter, activity, toaster, resources)
 
     @Before
     fun setUp() {
-        classToTest = GamesListView(adapter, activity, toaster, resources)
         classToTest.delegate = delegate
         classToTest.setViews(mock(), editText)
     }

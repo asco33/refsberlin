@@ -8,22 +8,17 @@ import fm.weigl.refsberlin.abouttheapp.view.AboutTheAppFragment
 import fm.weigl.refsberlin.gameslist.view.GamesListFragment
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class MainNavigatorTest {
 
-    @Mock lateinit var fragmentManager: FragmentManager
-    @Mock lateinit var transaction: FragmentTransaction
-    @Mock lateinit var delegate: MainNavigatorDelegate
+    val fragmentManager: FragmentManager = mock()
+    val transaction: FragmentTransaction = mock()
+    val delegate: MainNavigatorDelegate = mock()
 
-    lateinit var classToTest: MainNavigator
+    val classToTest = MainNavigator(fragmentManager)
 
     @Before
     fun setUp() {
-        classToTest = MainNavigator(fragmentManager)
         classToTest.delegate = delegate
     }
 

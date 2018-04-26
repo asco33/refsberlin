@@ -35,9 +35,9 @@ class GamesListAdapter @Inject constructor(
 
     override fun getItemCount() = games.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): GameViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
 
-        val inflater = LayoutInflater.from(parent?.context)
+        val inflater = LayoutInflater.from(parent.context)
 
         val binding = GameItemBinding.inflate(inflater, parent, false)
 
@@ -45,13 +45,13 @@ class GamesListAdapter @Inject constructor(
 
     }
 
-    override fun onBindViewHolder(holder: GameViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
 
-        holder?.setGameAndHighlightText(games.get(position), highlightText)
+        holder.setGameAndHighlightText(games.get(position), highlightText)
 
-        holder?.onEventIconClick { eventDelegate?.eventIconClickedForGame(games[position]) }
+        holder.onEventIconClick { eventDelegate?.eventIconClickedForGame(games[position]) }
 
-        holder?.onNavigationIconClick { eventDelegate?.navigationIconClickedForGame(games[position]) }
+        holder.onNavigationIconClick { eventDelegate?.navigationIconClickedForGame(games[position]) }
 
     }
 }

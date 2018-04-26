@@ -72,11 +72,11 @@ class GameViewModel @Inject constructor(contextCompat: ContextCompatWrapper,
 
     }
 
-    fun eventIconClicked(view: View) = onEventIconClick()
+    fun eventIconClicked() = onEventIconClick()
 
-    fun navigationIconClicked(view: View) = onNavigationIconClick()
+    fun navigationIconClicked() = onNavigationIconClick()
 
-    fun getRefName(game: Game, index: Int): Spannable? {
+    private fun getRefName(game: Game, index: Int): Spannable? {
 
         val ref = game.referees.getOrNull(index)
         if (ref == null) return null

@@ -19,28 +19,23 @@ import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class NavigationDrawerViewTest {
 
-    @Mock lateinit var activity: Activity
-    @Mock lateinit var toggleWrapper: ActionBarDrawerToggleWrapper
-    @Mock lateinit var toggle: ActionBarDrawerToggle
-    @Mock lateinit var drawer: DrawerLayout
-    @Mock lateinit var navigationView: NavigationView
-    @Mock lateinit var toolbar: Toolbar
-    @Mock lateinit var delegate: NavigationDrawerDelegate
-    @Mock lateinit var menuItem: MenuItem
-    @Mock lateinit var menuMapper: FragmentMenuMapper
+    val activity: Activity = mock()
+    val toggleWrapper: ActionBarDrawerToggleWrapper = mock()
+    val toggle: ActionBarDrawerToggle = mock()
+    val drawer: DrawerLayout = mock()
+    val navigationView: NavigationView = mock()
+    val toolbar: Toolbar = mock()
+    val delegate: NavigationDrawerDelegate = mock()
+    val menuItem: MenuItem = mock()
+    val menuMapper: FragmentMenuMapper = mock()
 
-    lateinit var classToTest: NavigationDrawerView
+    val classToTest = NavigationDrawerView(activity, toggleWrapper, menuMapper)
 
     @Before
     fun setUp() {
-        classToTest = NavigationDrawerView(activity, toggleWrapper, menuMapper)
         classToTest.delegate = delegate
         given(toggleWrapper.create(activity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close))
                 .willReturn(toggle)

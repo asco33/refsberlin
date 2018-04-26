@@ -1,22 +1,14 @@
 package fm.weigl.refsberlin.main.presenter
 
+import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.then
-import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class MainPresenterTest {
 
-    @Mock lateinit var navigator: MainNavigator
-    lateinit var classToTest: MainPresenter
+    val navigator: MainNavigator = mock()
 
-    @Before
-    fun setUp() {
-        classToTest = MainPresenter(navigator)
-    }
+    val classToTest = MainPresenter(navigator)
 
     @Test
     fun showsGamesListAtStart() {
