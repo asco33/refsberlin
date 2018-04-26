@@ -1,6 +1,7 @@
 package fm.weigl.refsberlin.calendar
 
 import android.content.res.Resources
+import com.nhaarman.mockito_kotlin.mock
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.TestGames.Companion.placeName
@@ -14,17 +15,13 @@ import fm.weigl.refsberlin.TestGames.Companion.team2Name
 import fm.weigl.refsberlin.base.UINavigator
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.verify
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class CalendarEventCreatorTest {
 
-    @Mock lateinit var uiNavigator: UINavigator
-    @Mock lateinit var resources: Resources
+    val uiNavigator: UINavigator = mock()
+    val resources: Resources = mock()
 
     val ref1Representation = "ref1Repr"
     val ref2Representation = "ref2Repr"
@@ -33,11 +30,10 @@ class CalendarEventCreatorTest {
 
     val game = TestGames.testGame
 
-    lateinit var classToTest: CalendarEventCreator
+    val classToTest = CalendarEventCreator(uiNavigator, resources)
 
     @Before
     fun setUp() {
-        classToTest = CalendarEventCreator(uiNavigator, resources)
         given(resources.getString(R.string.crew)).willReturn(crew)
         given(resources.getString(R.string.match_representation, team1Name, team2Name)).willReturn(eventRepresentation)
         given(resources.getString(R.string.referee_representation, ref1Name, ref1Pos)).willReturn(ref1Representation)

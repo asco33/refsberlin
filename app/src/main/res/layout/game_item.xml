@@ -17,18 +17,19 @@
         android:layout_height="wrap_content"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <View
+                android:id="@+id/upper_line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccent" />
 
             <TextView
-                android:id="@+id/tv_game_teams"
+                android:id="@+id/game_teams_label"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,210 +37,204 @@
                 android:padding="16dp"
                 android:text="@{game.teams}"
                 android:textColor="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@id/upper_line"
                 tools:text="Berlin Bears - Cottbus Crayfish" />
 
             <View
+                android:id="@+id/lower_line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent" />
+                android:background="@color/colorAccent"
+                app:layout_constraintTop_toBottomOf="@id/game_teams_label" />
 
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/navigation_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{() -> game.navigationIconClicked()}"
+                android:src="@drawable/ic_navigation"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lower_line" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{() -> game.eventIconClicked()}"
+                android:src="@drawable/ic_event"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/navigation_icon" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintRight_toLeftOf="@id/navigation_icon"
+                app:layout_constraintTop_toBottomOf="@id/lower_line">
 
-                <LinearLayout
-                    android:id="@+id/game_options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:onClick="@{game.navigationIconClicked}"
-                        app:srcCompat="@drawable/ic_navigation" />
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginTop="16dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:onClick="@{game.eventIconClicked}"
-                        app:srcCompat="@drawable/ic_event" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_game_location"
+                    style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/game_options"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:text="@{game.location}"
+                    tools:text="Blablastadion" />
 
+                <TextView
+                    android:id="@+id/tv_game_date"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@{game.date}"
+                    tools:text="28.5.2017 15:00" />
 
-                    <TextView
-                        android:id="@+id/tv_game_location"
-                        style="@style/TextAppearance.AppCompat.Medium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@{game.location}"
-                        tools:text="Blablastadion" />
+                <TextView
+                    android:id="@+id/tv_game_ref0"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{game.ref0}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref0 == null ? View.GONE : View.VISIBLE}"
+                    tools:text="Max Musterref" />
 
-                    <TextView
-                        android:id="@+id/tv_game_date"
-                        style="@style/TextAppearance.AppCompat.Medium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@{game.date}"
-                        tools:text="28.5.2017 15:00" />
+                <TextView
+                    android:id="@+id/tv_game_ref1"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref1}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref1 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref0"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@{game.ref0}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref0 == null ? View.GONE : View.VISIBLE}"
-                        tools:text="Max Musterref" />
+                <TextView
+                    android:id="@+id/tv_game_ref2"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref2}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref2 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref1"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref1}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref1 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref3"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref3}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref3 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref2"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref2}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref2 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref4"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref4}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref4 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref3"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref3}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref3 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref5"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref5}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref5 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref4"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref4}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref4 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref6"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref6}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref6 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref5"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref5}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref5 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref7"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref7}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref7 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref6"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref6}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref6 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref8"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref8}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref8 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref7"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref7}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref7 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref9"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref9}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref9 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref8"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref8}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref8 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref10"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref10}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref10 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref9"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref9}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref9 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref11"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref11}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref11 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref10"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref10}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref10 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref12"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref12}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref12 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref11"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref11}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref11 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref13"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref13}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref13 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref12"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref12}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref12 == null ? View.GONE : View.VISIBLE}" />
+                <TextView
+                    android:id="@+id/tv_game_ref14"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{game.ref14}"
+                    android:textColor="@android:color/black"
+                    android:visibility="@{game.ref14 == null ? View.GONE : View.VISIBLE}" />
 
-                    <TextView
-                        android:id="@+id/tv_game_ref13"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref13}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref13 == null ? View.GONE : View.VISIBLE}" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_game_ref14"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.ref14}"
-                        android:textColor="@android:color/black"
-                        android:visibility="@{game.ref14 == null ? View.GONE : View.VISIBLE}" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 </layout>

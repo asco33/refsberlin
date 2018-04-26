@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,40 +10,41 @@
             type="fm.weigl.refsberlin.error.view.ErrorScreen" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="32dp"
         android:visibility="@{error.error == null ? View.GONE : View.VISIBLE}">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/error_message_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:text="@{error.error}"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@id/error_retry_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Es ist ein Fehler aufgetreten" />
 
+        <Button
+            android:id="@+id/error_retry_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            android:onClick="@{() -> error.retryClicked()}"
+            android:text="@string/retry"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_message_textview" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@{error.error}"
-                android:textSize="16sp"
-                tools:text="Es ist ein Fehler aufgetretet" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorPrimary"
-                android:onClick="@{() -> error.retryClicked()}"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:text="@string/retry"
-                android:textColor="@android:color/white" />
-
-        </LinearLayout>
-
-    </FrameLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>

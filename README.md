@@ -1,6 +1,6 @@
 # RefsBerlin
 
-[![Build Status](https://travis-ci.org/fmweigl/refsberlin.svg?branch=develop)](https://travis-ci.org/fmweigl/refsberlin) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![Build Status](https://travis-ci.org/fmweigl/refsberlin.svg?branch=master)](https://travis-ci.org/fmweigl/refsberlin) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 <a href='https://play.google.com/store/apps/details?id=fm.weigl.refsberlin&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/badge_new.png'/></a>
 
 

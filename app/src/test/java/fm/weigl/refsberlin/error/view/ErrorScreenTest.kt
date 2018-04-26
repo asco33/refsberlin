@@ -1,30 +1,22 @@
 package fm.weigl.refsberlin.error.view
 
 import android.content.res.Resources
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.given
-import com.nhaarman.mockito_kotlin.then
+import com.nhaarman.mockito_kotlin.*
 import fm.weigl.refsberlin.R
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class ErrorScreenTest {
 
-    @Mock lateinit var resources: Resources
-    @Mock lateinit var delegate: ErrorScreenDelegate
+    val resources: Resources = mock()
+    val delegate: ErrorScreenDelegate = mock()
 
-    lateinit var classToTest: ErrorScreen
+    val classToTest = ErrorScreen(resources)
 
     @Before
     fun setUp() {
-        classToTest = ErrorScreen(resources)
         classToTest.delegate = delegate
     }
 

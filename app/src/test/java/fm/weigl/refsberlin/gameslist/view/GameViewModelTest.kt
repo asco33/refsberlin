@@ -1,7 +1,7 @@
 package fm.weigl.refsberlin.gameslist.view
 
 import android.text.Spannable
-import android.view.View
+import com.nhaarman.mockito_kotlin.mock
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.TestGames.Companion.ref1
@@ -13,24 +13,19 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
-import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class GameViewModelTest {
 
-    @Mock lateinit var highlighter: TextHighlighter
-    @Mock lateinit var contextCompat: ContextCompatWrapper
-    @Mock lateinit var formatter: GameInfoFormatter
-    @Mock lateinit var ref0Spannable: Spannable
-    @Mock lateinit var ref1Spannable: Spannable
-    @Mock lateinit var teamsSpannable: Spannable
-    @Mock lateinit var eventIconCallback: () -> Unit
-    @Mock lateinit var navigationIconCallback: () -> Unit
+    val highlighter: TextHighlighter = mock()
+    val contextCompat: ContextCompatWrapper = mock()
+    val formatter: GameInfoFormatter = mock()
+    val ref0Spannable: Spannable = mock()
+    val ref1Spannable: Spannable = mock()
+    val teamsSpannable: Spannable = mock()
+    val eventIconCallback: () -> Unit = mock()
+    val navigationIconCallback: () -> Unit = mock()
 
     val game = TestGames.testGame
     val textToHighlight = "textToHighlight"
@@ -106,7 +101,7 @@ class GameViewModelTest {
 
         classToTest.onEventIconClick = eventIconCallback
 
-        classToTest.eventIconClicked(mock(View::class.java))
+        classToTest.eventIconClicked()
 
         verify(eventIconCallback).invoke()
 
@@ -117,7 +112,7 @@ class GameViewModelTest {
 
         classToTest.onNavigationIconClick = navigationIconCallback
 
-        classToTest.navigationIconClicked(mock(View::class.java))
+        classToTest.navigationIconClicked()
 
         verify(navigationIconCallback).invoke()
 

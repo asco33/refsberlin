@@ -2,6 +2,7 @@ package fm.weigl.refsberlin.gameslist.presenter
 
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.then
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.TestGames.Companion.placeName
@@ -14,35 +15,28 @@ import fm.weigl.refsberlin.gameslist.view.IGamesListView
 import fm.weigl.refsberlin.rx.TestSchedulers
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
-import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
-import org.mockito.junit.MockitoJUnitRunner
 import rx.Observable
 
-@RunWith(MockitoJUnitRunner::class)
 class GamesListPresenterTest {
 
-    @Mock lateinit var gamesRepository: GamesRepository
-    @Mock lateinit var filter: GamesFilter
-    @Mock lateinit var view: IGamesListView
-    @Mock lateinit var eventCreator: CalendarEventCreator
-    @Mock lateinit var errorScreen: IErrorScreen
-    @Mock lateinit var uiNavigator: UINavigator
+    val gamesRepository: GamesRepository = mock()
+    val filter: GamesFilter = mock()
+    val view: IGamesListView = mock()
+    val eventCreator: CalendarEventCreator = mock()
+    val errorScreen: IErrorScreen = mock()
+    val uiNavigator: UINavigator = mock()
     val schedulers = TestSchedulers()
 
     val game1 = TestGames.testGame
     val game2 = TestGames.testGame
     val gamesList = listOf(game1, game2)
 
-    lateinit var classToTest: GamesListPresenter
+    val classToTest = GamesListPresenter(gamesRepository, schedulers, filter, eventCreator, uiNavigator)
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        classToTest = GamesListPresenter(gamesRepository, schedulers, filter, eventCreator, uiNavigator)
         classToTest.view = view
         classToTest.errorScreen = errorScreen
     }
