@@ -2,7 +2,7 @@ package fm.weigl.refsberlin.gameslist.net
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import fm.weigl.cache.SimpleCache
+import fm.weigl.refsberlin.cache.SimpleCache
 import fm.weigl.refdata.games.Games
 import javax.inject.Inject
 

@@ -1,7 +1,5 @@
 package fm.weigl.refsberlin.gameslist.presenter
 
-import android.util.Log
-import android.util.Log.i
 import fm.weigl.refdata.games.Game
 import fm.weigl.refsberlin.base.LoadingState
 import fm.weigl.refsberlin.base.UINavigator
@@ -59,9 +57,9 @@ class GamesListPresenter @Inject constructor(private val gamesRepository: GamesR
 
     override fun navigationIconClickedForGame(game: Game) = uiNavigator.showNavigationToLocation(game.place.place)
 
-    override fun retryClicked() = loadGames(true)
-
     override fun refreshPulled() = loadGames(false)
+
+    override fun retryClicked() = loadGames(true)
 
     private fun showFilteredGames() {
         val filterText = view.getFilterText()

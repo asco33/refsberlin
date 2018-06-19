@@ -15,7 +15,7 @@ The backend project can be found here: https://github.com/fmweigl/refserver
 
 ## License
 
-    Copyright 2017 Florian Weigl
+    Copyright 2017-2018 Florian Weigl
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

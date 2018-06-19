@@ -21,7 +21,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.verify
-import rx.Observable
 
 class GamesListPresenterTest {
 
@@ -36,7 +35,7 @@ class GamesListPresenterTest {
     val game2 = TestGames.testGame
     val gamesList = listOf(game1, game2)
 
-    val classToTest = GamesListPresenter(gamesRepository, schedulers, filter, eventCreator, uiNavigator)
+    val classToTest = GamesListPresenter(gamesRepository, filter, eventCreator, uiNavigator)
 
     @Before
     fun setUp() {
