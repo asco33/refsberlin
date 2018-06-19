@@ -1,4 +1,4 @@
-package fm.weigl.cache
+package fm.weigl.refsberlin.cache
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
