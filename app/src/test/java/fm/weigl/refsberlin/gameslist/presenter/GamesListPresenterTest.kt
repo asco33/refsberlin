@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.then
+import com.nhaarman.mockito_kotlin.*
 import fm.weigl.refsberlin.TestGames
 import fm.weigl.refsberlin.TestGames.Companion.placeName
 import fm.weigl.refsberlin.base.LoadingState
@@ -12,7 +13,10 @@ import fm.weigl.refsberlin.calendar.CalendarEventCreator
 import fm.weigl.refsberlin.error.view.IErrorScreen
 import fm.weigl.refsberlin.gameslist.net.GamesRepository
 import fm.weigl.refsberlin.gameslist.view.IGamesListView
-import fm.weigl.refsberlin.rx.TestSchedulers
+import io.reactivex.Observable
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
 import org.mockito.BDDMockito.given
@@ -27,7 +31,6 @@ class GamesListPresenterTest {
     val eventCreator: CalendarEventCreator = mock()
     val errorScreen: IErrorScreen = mock()
     val uiNavigator: UINavigator = mock()
-    val schedulers = TestSchedulers()
 
     val game1 = TestGames.testGame
     val game2 = TestGames.testGame
@@ -37,27 +40,42 @@ class GamesListPresenterTest {
 
     @Before
     fun setUp() {
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
         classToTest.view = view
         classToTest.errorScreen = errorScreen
     }
 
     @Test
-    fun displayGames() {
+    fun displaysGames() {
 
-        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(gamesRepository.getGames(any())).willReturn(Observable.just(gamesList))
         given(view.getFilterText()).willReturn("")
         given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
 
-        classToTest.loadGames()
+        classToTest.loadGames(true)
 
         verify(view).displayGames(gamesList)
 
     }
 
     @Test
-    fun refreshesGames() {
+    fun displaysIdenticalGamesOnlyOnce() {
 
-        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(gamesRepository.getGames(any())).willReturn(Observable.just(gamesList, gamesList))
+        given(view.getFilterText()).willReturn("")
+        given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
+
+        classToTest.loadGames(true)
+
+        verify(view, times(1)).displayGames(gamesList)
+
+    }
+
+    @Test
+    fun refreshesGamesNotAcceptingCached() {
+
+        given(gamesRepository.getGames(false)).willReturn(Observable.just(gamesList))
         given(view.getFilterText()).willReturn("")
         given(filter.filterGames(eq(gamesList), any())).willReturn(gamesList)
 
@@ -72,9 +90,9 @@ class GamesListPresenterTest {
 
         val filterText = "filter"
         given(view.getFilterText()).willReturn(filterText)
-        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(gamesRepository.getGames(any())).willReturn(Observable.just(gamesList))
 
-        classToTest.loadGames()
+        classToTest.loadGames(true)
 
         given(filter.filterGames(gamesList, filterText)).willReturn(listOf(game2))
 
@@ -90,9 +108,9 @@ class GamesListPresenterTest {
         val filterText = "filter"
         given(filter.filterGames(gamesList, filterText)).willReturn(listOf(game2))
         given(view.getFilterText()).willReturn(filterText)
-        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(gamesRepository.getGames(any())).willReturn(Observable.just(gamesList))
 
-        classToTest.loadGames()
+        classToTest.loadGames(true)
 
         verify(view).displayGames(listOf(game2))
 
@@ -120,9 +138,9 @@ class GamesListPresenterTest {
     @Test
     fun showsLoadingWhenStartsToLoad() {
 
-        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(gamesRepository.getGames(any())).willReturn(Observable.just(gamesList))
 
-        classToTest.loadGames()
+        classToTest.loadGames(true)
 
         verify(view).setLoadingState(LoadingState.LOADING)
 
@@ -131,9 +149,9 @@ class GamesListPresenterTest {
     @Test
     fun showsRefreshingWhenStartsToLoadAgain() {
 
-        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(gamesRepository.getGames(any())).willReturn(Observable.just(gamesList))
 
-        classToTest.loadGames()
+        classToTest.loadGames(true)
 
         classToTest.refreshPulled()
 
@@ -144,9 +162,9 @@ class GamesListPresenterTest {
     @Test
     fun hidesLoadingWhenLoadingDone() {
 
-        given(gamesRepository.getGames()).willReturn(Observable.just(gamesList))
+        given(gamesRepository.getGames(any())).willReturn(Observable.just(gamesList))
 
-        classToTest.loadGames()
+        classToTest.loadGames(true)
 
         verify(view).setLoadingState(LoadingState.DONE)
 
@@ -155,24 +173,37 @@ class GamesListPresenterTest {
     @Test
     fun hidesLoadingOnErrorLoaded() {
 
-        given(gamesRepository.getGames()).willReturn(Observable.error(Throwable()))
+        given(gamesRepository.getGames(any())).willReturn(Observable.error(Throwable()))
 
-        classToTest.loadGames()
+        classToTest.loadGames(true)
 
         verify(view).setLoadingState(LoadingState.DONE)
 
     }
 
     @Test
-    fun showsError() {
+    fun showsMajorErrorWhenViewEmpty() {
 
         val error = Throwable()
+        given(gamesRepository.getGames(any())).willReturn(Observable.error(error))
+        given(view.isEmpty()).willReturn(true)
 
-        given(gamesRepository.getGames()).willReturn(Observable.error(error))
+        classToTest.loadGames(true)
 
-        classToTest.loadGames()
+        then(errorScreen).should().showMajorError(error.toString())
 
-        then(errorScreen).should().showError(error.toString())
+    }
+
+    @Test
+    fun showsMinorErrorWhenViewNotEmpty() {
+
+        val error = Throwable()
+        given(gamesRepository.getGames(any())).willReturn(Observable.error(error))
+        given(view.isEmpty()).willReturn(false)
+
+        classToTest.loadGames(true)
+
+        then(errorScreen).should().showMinorError()
 
     }
 

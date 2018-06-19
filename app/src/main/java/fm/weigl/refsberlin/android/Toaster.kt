@@ -16,7 +16,7 @@ class Toaster @Inject constructor(
         toast?.cancel()
         toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
         toast?.setText(text)
-        toast?.setGravity(Gravity.TOP or Gravity.RIGHT, 50, 200)
+        toast?.setGravity(Gravity.TOP or Gravity.END, 50, 200)
         toast?.show()
     }
 }

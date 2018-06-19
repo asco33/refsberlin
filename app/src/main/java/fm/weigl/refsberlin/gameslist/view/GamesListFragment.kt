@@ -34,7 +34,7 @@ class GamesListFragment : BaseFragment() {
         presenter.view = gamesListView
         gamesListView.delegate = presenter
 
-        presenter.loadGames()
+        presenter.loadGames(acceptCached = true)
 
         return binding.root
     }

@@ -4,25 +4,28 @@ import com.nhaarman.mockito_kotlin.*
 import fm.weigl.refdata.appversion.AppVersion
 import fm.weigl.refsberlin.base.AppMeta
 import fm.weigl.refsberlin.navigation.GeneralNavigator
-import fm.weigl.refsberlin.rx.TestSchedulers
 import fm.weigl.refsberlin.update.net.AppVersionRepository
 import fm.weigl.refsberlin.update.view.IUpdateDialogView
+import io.reactivex.Single
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
-import rx.Observable
 
 class UpdateDialogPresenterTest {
 
     val appVersionRepository: AppVersionRepository = mock()
     val appMeta: AppMeta = mock()
     val navigator: GeneralNavigator = mock()
-    val schedulers = TestSchedulers()
     val updateView: IUpdateDialogView = mock()
 
-    val classToTest = UpdateDialogPresenter(appVersionRepository, appMeta, navigator, schedulers)
+    val classToTest = UpdateDialogPresenter(appVersionRepository, appMeta, navigator)
 
     @Before
     fun setUp() {
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
         classToTest.updateView = updateView
     }
 
@@ -44,7 +47,7 @@ class UpdateDialogPresenterTest {
 
         given(appMeta.versionCode()).willReturn(oldVersionCode)
 
-        given(appVersionRepository.appVersion()).willReturn(Observable.just(appVersion))
+        given(appVersionRepository.appVersion()).willReturn(Single.just(appVersion))
 
         classToTest.onCreate(null)
 
@@ -61,7 +64,7 @@ class UpdateDialogPresenterTest {
 
         given(appMeta.versionCode()).willReturn(versionCode)
 
-        given(appVersionRepository.appVersion()).willReturn(Observable.just(appVersion))
+        given(appVersionRepository.appVersion()).willReturn(Single.just(appVersion))
 
         classToTest.onCreate(null)
 

@@ -1,10 +1,11 @@
 package fm.weigl.refsberlin.update.net
 
 import fm.weigl.refdata.appversion.AppVersion
-import rx.Observable
+import io.reactivex.Single
+import retrofit2.http.GET
 
 interface AppVersionService {
-    @retrofit.http.GET("/appversion")
-    fun appVersion(): Observable<AppVersion>
+    @GET("/appversion")
+    fun appVersion(): Single<AppVersion>
 
 }

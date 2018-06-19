@@ -11,12 +11,15 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var activityComponent: ActivityComponent
     private var mainLifecycleDelegates = emptyList<MainLifecycleDelegate>()
     private var extraLifecycleDelegates = emptyList<ExtraLifecycleDelegate>()
+    private val appComponent by lazy {
+        (applicationContext as App).appComponent
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activityComponent = DaggerActivityComponent.builder()
-                .appComponent(appComponent())
+                .appComponent(appComponent)
                 .activityModule(ActivityModule(this))
                 .build()
 
@@ -52,7 +55,5 @@ abstract class BaseActivity : AppCompatActivity() {
 
         if (isChangingConfigurations) extraLifecycleDelegates = emptyList()
     }
-
-    private fun appComponent() = (applicationContext as App).getAppComponent()
 
 }
