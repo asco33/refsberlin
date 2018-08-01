@@ -40,16 +40,12 @@ class GamesListView @Inject constructor(
         }
 
     fun setViews(recyclerView: RecyclerView, editText: EditText) {
-
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         this.editText = editText
-
     }
 
-    fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-        delegate?.filterTextChanged()
-    }
+    fun onTextChanged() = delegate?.filterTextChanged()
 
     fun clearButtonClicked() = editText.setText("")
 
