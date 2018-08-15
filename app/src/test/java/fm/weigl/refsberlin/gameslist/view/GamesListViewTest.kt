@@ -60,9 +60,7 @@ class GamesListViewTest {
     @Test
     fun delegatesFilterTextChanged() {
 
-        val text = "  text  "
-
-        classToTest.onTextChanged(text, 0, 0, 0)
+        classToTest.onTextChanged()
 
         verify(delegate).filterTextChanged()
 
