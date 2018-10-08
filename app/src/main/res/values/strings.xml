@@ -7,7 +7,7 @@
     <string name="navigation_drawer_open">Öffnen</string>
     <string name="navigation_drawer_close">Schließen</string>
     <string name="nav_item_gameslist">Ansetzungen</string>
-    <string name="nav_item_about_the_app">Über die App</string>
+    <string name="nav_item_about_the_app">Impressum / Über die App</string>
     <string name="schedule_disclaimer">Alle Angaben ohne Gewähr. \nOffizielle Seite für Schiedsrichteransetzungen ist www.refbb.de. </string>
     <string name="error">Es ist ein Fehler aufgetreten</string>
     <string name="error_w_reason">Es ist ein Fehler aufgetreten \n%1$s</string>
@@ -17,5 +17,7 @@
     <string name="update_version">Version: %1$s</string>
     <string name="update_dialog_button_update">Jetzt updaten</string>
     <string name="update_dialog_button_no_thanks">Nein danke</string>
+    <string name="imprint">Impressum</string>
+    <string name="imprint_content">Florian Weigl\nSeydelstr. 7\n10117 Berlin\nfmweigl@gmail.com</string>
 
 </resources>

@@ -12,5 +12,4 @@ class AboutTheAppViewModel @Inject constructor(
     init {
         appNameAndVersion.set("${appMeta.appName()} ${appMeta.versionName()}")
     }
-
 }
