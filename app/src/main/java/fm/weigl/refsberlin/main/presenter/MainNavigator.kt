@@ -6,10 +6,12 @@ import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.abouttheapp.view.AboutTheAppFragment
 import fm.weigl.refsberlin.di.ActivityScope
 import fm.weigl.refsberlin.gameslist.view.GamesListFragment
+import fm.weigl.refsberlin.privacy.PrivacyFragment
 import javax.inject.Inject
 
 interface IMainNavigator {
     fun showGamesList(onlyIfNothingElseShown: Boolean = false)
+    fun showPrivacy()
     fun showAboutTheApp()
 }
 
@@ -43,6 +45,12 @@ class MainNavigator @Inject constructor(
         showFragment(GamesListFragment(), false)
     }
 
+    override fun showPrivacy() {
+        if (!isPrivacyFragmentOnTop()) {
+            showFragment(PrivacyFragment())
+        }
+    }
+
     override fun showAboutTheApp() {
         if (!isAboutTheAppFragmentOnTop()) {
             showFragment(AboutTheAppFragment())
@@ -67,6 +75,8 @@ class MainNavigator @Inject constructor(
     private fun currentFragment(): Fragment? = fragmentManager.findFragmentById(R.id.main_content_container)
 
     private fun isGamesListFragmentOnTop() = currentFragment() is GamesListFragment
+
+    private fun isPrivacyFragmentOnTop() = currentFragment() is PrivacyFragment
 
     private fun isAboutTheAppFragmentOnTop() = currentFragment() is AboutTheAppFragment
 

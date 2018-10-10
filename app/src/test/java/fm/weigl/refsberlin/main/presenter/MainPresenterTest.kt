@@ -29,6 +29,15 @@ class MainPresenterTest {
     }
 
     @Test
+    fun showPrivacy() {
+
+        classToTest.privacySelected()
+
+        then(navigator).should().showPrivacy()
+
+    }
+
+    @Test
     fun showsAboutTheApp() {
 
         classToTest.aboutTheAppSelected()
