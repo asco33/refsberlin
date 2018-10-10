@@ -101,16 +101,19 @@ class NavigationDrawerViewTest {
 
         val gamesListMenuItem = mock<MenuItem>()
         val aboutTheAppMenuItem = mock<MenuItem>()
+        val privacyMenuItem = mock<MenuItem>()
 
         val menu = mock<Menu>()
         given(navigationView.menu).willReturn(menu)
 
         given(menu.findItem(R.id.nav_gameslist)).willReturn(gamesListMenuItem)
+        given(menu.findItem(R.id.nav_privacy)).willReturn(privacyMenuItem)
         given(menu.findItem(R.id.nav_about_the_app)).willReturn(aboutTheAppMenuItem)
 
         classToTest.fragmentChanged(fragment)
 
         then(gamesListMenuItem).should().isChecked = true
+        then(privacyMenuItem).should().isChecked = false
         then(aboutTheAppMenuItem).should().isChecked = false
     }
 

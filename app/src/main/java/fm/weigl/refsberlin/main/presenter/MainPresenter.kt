@@ -18,5 +18,7 @@ class MainPresenter @Inject constructor(
 
     override fun gamesListSelected() = mainNavigator.showGamesList()
 
+    override fun privacySelected() = mainNavigator.showPrivacy()
+
     override fun aboutTheAppSelected() = mainNavigator.showAboutTheApp()
 }

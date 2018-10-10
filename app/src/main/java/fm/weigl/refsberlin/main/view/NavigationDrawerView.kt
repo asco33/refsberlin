@@ -17,6 +17,7 @@ import javax.inject.Inject
 
 interface NavigationDrawerDelegate {
     fun gamesListSelected()
+    fun privacySelected()
     fun aboutTheAppSelected()
 }
 
@@ -32,8 +33,7 @@ class NavigationDrawerView @Inject constructor(
 
     var delegate: NavigationDrawerDelegate? = null
 
-    private val allMenuIds = listOf(R.id.nav_gameslist, R.id.nav_about_the_app)
-
+    private val allMenuIds = listOf(R.id.nav_gameslist, R.id.nav_privacy, R.id.nav_about_the_app)
 
     fun setViews(drawer: DrawerLayout, navigationView: NavigationView, toolbar: Toolbar) {
         this.drawer = drawer
@@ -52,6 +52,7 @@ class NavigationDrawerView @Inject constructor(
         when (item.itemId) {
             R.id.nav_gameslist -> delegate?.gamesListSelected()
             R.id.nav_about_the_app -> delegate?.aboutTheAppSelected()
+            R.id.nav_privacy -> delegate?.privacySelected()
         }
 
         drawer.closeDrawers()

@@ -6,6 +6,7 @@ import com.nhaarman.mockito_kotlin.*
 import fm.weigl.refsberlin.R
 import fm.weigl.refsberlin.abouttheapp.view.AboutTheAppFragment
 import fm.weigl.refsberlin.gameslist.view.GamesListFragment
+import fm.weigl.refsberlin.privacy.PrivacyFragment
 import org.junit.Before
 import org.junit.Test
 
@@ -67,6 +68,19 @@ class MainNavigatorTest {
         classToTest.showGamesList(onlyIfNothingElseShown = true)
 
         then(fragmentManager).should(never()).beginTransaction()
+    }
+
+    @Test
+    fun showsPrivacy() {
+
+        mockTransAction()
+
+        classToTest.showPrivacy()
+
+        then(transaction).should().replace(eq(R.id.main_content_container), argThat {
+            this is PrivacyFragment
+        })
+
     }
 
     @Test
