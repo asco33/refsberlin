@@ -54,6 +54,17 @@ class NavigationDrawerViewTest {
     }
 
     @Test
+    fun delegatesSettingsSelected() {
+
+        given(menuItem.itemId).willReturn(R.id.nav_settings)
+
+        classToTest.onNavigationItemSelected(menuItem)
+
+        then(delegate).should().settingsSelected()
+
+    }
+
+    @Test
     fun delegatesAboutTheAppSelected() {
 
         given(menuItem.itemId).willReturn(R.id.nav_about_the_app)
@@ -61,6 +72,17 @@ class NavigationDrawerViewTest {
         classToTest.onNavigationItemSelected(menuItem)
 
         then(delegate).should().aboutTheAppSelected()
+
+    }
+
+    @Test
+    fun delegatesPrivacySelected() {
+
+        given(menuItem.itemId).willReturn(R.id.nav_privacy)
+
+        classToTest.onNavigationItemSelected(menuItem)
+
+        then(delegate).should().privacySelected()
 
     }
 
@@ -100,6 +122,7 @@ class NavigationDrawerViewTest {
         given(menuMapper.menuIdForFragment(fragment)).willReturn(R.id.nav_gameslist)
 
         val gamesListMenuItem = mock<MenuItem>()
+        val settingsMenuItem = mock<MenuItem>()
         val aboutTheAppMenuItem = mock<MenuItem>()
         val privacyMenuItem = mock<MenuItem>()
 
@@ -107,15 +130,15 @@ class NavigationDrawerViewTest {
         given(navigationView.menu).willReturn(menu)
 
         given(menu.findItem(R.id.nav_gameslist)).willReturn(gamesListMenuItem)
+        given(menu.findItem(R.id.nav_settings)).willReturn(settingsMenuItem)
         given(menu.findItem(R.id.nav_privacy)).willReturn(privacyMenuItem)
         given(menu.findItem(R.id.nav_about_the_app)).willReturn(aboutTheAppMenuItem)
 
         classToTest.fragmentChanged(fragment)
 
         then(gamesListMenuItem).should().isChecked = true
+        then(settingsMenuItem).should().isChecked = false
         then(privacyMenuItem).should().isChecked = false
         then(aboutTheAppMenuItem).should().isChecked = false
     }
-
-
 }

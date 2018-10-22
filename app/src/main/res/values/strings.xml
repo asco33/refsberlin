@@ -20,5 +20,7 @@
     <string name="update_dialog_button_no_thanks">Nein danke</string>
     <string name="imprint">Impressum</string>
     <string name="imprint_content">Florian Weigl\nSeydelstr. 7\n10117 Berlin\nfmweigl@gmail.com</string>
+    <string name="settings_crash_reports_tracking_label">Crash-Reports und Tracking ein- oder ausschalten (wirksam nach Neustart der App)</string>
+    <string name="settings">Einstellungen</string>
 
 </resources>
